@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC_Adjacency_list_model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,9 @@ namespace MVC_Adjacency_list_model.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View();
+            List<Category> listCategory = new List<Category>();
+            listCategory = objCategory.GetAllCategories().ToList();
+            return View(listCategory);
         }
     }
 }

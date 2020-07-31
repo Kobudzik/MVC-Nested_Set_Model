@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MVC_Adjacency_list_model.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Index at Category</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rgt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lft)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rgt)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="DeleteById" asp-route-id="@item.ID">Delete by ID</a>
+                    <a asp-action="DeleteByName" asp-route-id="@item.Name">Delete by Name</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
