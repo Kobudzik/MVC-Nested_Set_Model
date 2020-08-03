@@ -3,21 +3,27 @@
 
 @helper TreeView(List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel> categoryTree)
 {
-    if (categoryTree.Count() > 0)
-    {
+
+string leaf = null;
+if (categoryTree.Count() > 0)
+{
         @:<ul>
             foreach (var item in categoryTree)
-            {
-                @*jeśli obiekt głębiej istnieje*@
-                if (item != null)
-                {
-                    <li>
+    {
+        if(item.deeperList.Count==0)
+        {
+            leaf = "leaf";
+        }
+        else
+        {
+            leaf = null;
+        }
+                    <li class="@leaf">
                         @item.Name
                         @DisplayMenu(item)
                         @*sprawdza dalej*@
                         @TreeView(item.deeperList)
                     </li>
-                }
             }
         @:</ul>
     }
@@ -31,6 +37,8 @@
     @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font" })
     <a class="small-font" href="javascript:deleteScript(@item.ID);">🗑️</a>
     @Html.ActionLink("➕  ", "NewNode", "Category", new { id = item.ID }, new { @class = "small-font" })
+    <a class="small-font" id="newClick">sortNew</a>
+
 }
 
 
@@ -41,11 +49,20 @@
 
 
 @Html.ActionLink("➕  ", "NewNode", "Category", new { id = 1 }, new { @class = "small-font" })
-<ul id="list">
+<ul id="00">
     @*pierwszy poziom*@
     @foreach (var item in Model)
     {
-        <li>
+        string leaf = null;
+        if (item.deeperList.Count == 0)
+        {
+            leaf = "leaf";
+        }
+        else
+        {
+            leaf = null;
+        }
+        <li class="@leaf">
             @item.Name
             @DisplayMenu(item)
             @TreeView(item.deeperList)
@@ -83,26 +100,23 @@
                 $(this).children('.subLink').toggle('slow');
             });
 
-          
+
 
             //<a> toggling fix
-            $("#list a").click(function (e) {
+            $("#00 a").click(function (e) {
                 e.stopPropagation();
             });
-            //***********TOGGLING************\\         
+            //***********TOGGLING************\\
 
 
 
 
 
+        });
 
-            ////SORT
-            $('ul li').click(function (toggle) {  // inserted callback param EVENT
-                toggle.stopPropagation(); // stop click from bubbling up
-                $(this).children(".subLink").addClass("red");
-            });
-
-            
+        $('#newClick').click(function (toggle) {  // inserted callback param EVENT
+            toggle.stopPropagation(); // stop click from bubbling up
+            $("#00 :first-child li").addClass("red");
         });
 
 
