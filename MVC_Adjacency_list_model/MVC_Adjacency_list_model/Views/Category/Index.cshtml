@@ -80,7 +80,7 @@
             });
 
 
-            //<a> toggling fix
+            //<a> (display menu) toggling fix
             $("#listDiv a").click(function (e) {
                 e.stopPropagation();
             });
@@ -94,7 +94,7 @@
 
         $('#newClick').click(function (toggle) {  // inserted callback param EVENT
             toggle.stopPropagation();
-            $("*").not(".leaf").addClass("red");
+            $("ul>li").not(".leaf").addClass("red");
         });
 
 
