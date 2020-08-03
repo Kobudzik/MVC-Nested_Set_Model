@@ -1,4 +1,4 @@
-﻿    using Microsoft.Ajax.Utilities;
+﻿using Microsoft.Ajax.Utilities;
 using MVC_Adjacency_list_model.ViewModels;
 using MVC_Adjacency_list_model.Models;
 using System;
@@ -6,15 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Web;
-//using System.Web.Http;
 using System.Web.Mvc;
 
 namespace MVC_Adjacency_list_model.Controllers
 {
     public class CategoryController : Controller
     {
-        //throw new HttpResponseException(HttpStatusCode.BadRequest);
 
         CategoryViewAccessLayer objCategory = new CategoryViewAccessLayer();
 
@@ -29,28 +26,6 @@ namespace MVC_Adjacency_list_model.Controllers
             List<CategoryCarrierViewModel> nestedList = new List<CategoryCarrierViewModel>();
             objCategory.GetRootLftRgt(out lft, out rgt);
             objCategory.GetChildren(lft, rgt, nestedList);
-
-            //Debug.WriteLine("********************NEW************");
-
-            //foreach(var item in nestedList)///pierwszy poziom
-            //{
-            //    Debug.WriteLine("FIRST: "+ item.Name); //wyswietlenie pierwszego poziomu
-
-
-            //    if(item.deeperList != null)//jeśli jest drugi poziom
-            //    {
-            //        foreach (var deeperItem in item.deeperList) //petla drugiego poziomu
-            //        {
-            //            Debug.WriteLine("SECOND: " + deeperItem.Name); //wyświetlenie drugiego poziomu
-
-            //            if (deeperItem.deeperList!=null)// jeśli jest trzeci poziom
-            //                foreach (var evenDeeperItem in deeperItem.deeperList)//petla trzeciego poziomu
-            //                {
-            //                  Debug.WriteLine("THIRD: " + evenDeeperItem.Name);//wyświetlenie trzeciego poziomu
-            //                }
-            //        }
-            //    }
-            //}
             return View(nestedList);
         }
         
@@ -61,7 +36,7 @@ namespace MVC_Adjacency_list_model.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();//ERROR
+                return HttpNotFound();
             }
 
             //gets data of one node to display it to user
@@ -69,7 +44,7 @@ namespace MVC_Adjacency_list_model.Controllers
 
             if (category.ID==0 || category.Name=="ROOT")
             {
-                return HttpNotFound();//ERROR
+                return HttpNotFound();
             }
 
             return View(category);
@@ -82,9 +57,6 @@ namespace MVC_Adjacency_list_model.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Rename(Category category)
         {
-            //jeśli przesłane id nie jest równe ID zmienianemu obiektowi
-   
-            
             //if parameter object is not valid
             if (!ModelState.IsValid)
             { 
@@ -96,11 +68,41 @@ namespace MVC_Adjacency_list_model.Controllers
         }
 
 
+        //GET   /category/NewNode/ID
+        [HttpGet]
+        public ActionResult NewNode(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
 
-        
+            //gets data of one node to display it to user
+            Category categoryInDB = objCategory.GetCategoryData(id);
+
+            //if object doesn't exist
+            if (categoryInDB.ID!=id)
+            {
+                Debug.Write("OBJECT DOESNT EXIST!");
+                return HttpNotFound();
+            }
+            return View(categoryInDB);
+        }
 
 
-
+        //POST   /category/NewNode
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewNode(Category category)
+        {
+            //if parameter object is not valid
+            if (!ModelState.IsValid)
+            {
+                return View(category);
+            }
+            objCategory.InsertInside(category.ID, category.Name);
+            return RedirectToAction("Index");
+        }
 
 
 

@@ -17,7 +17,7 @@ namespace MVC_Adjacency_list_model.Models
         string connectionString = @"Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-MVC_Adjacency_list_model-20200731104721.mdf;Initial Catalog=aspnet-MVC_Adjacency_list_model-20200731104721;Integrated Security=True";
 
 
-        /////To View all Categories details    
+        /////To View all Categories details    NOT USED
         public IEnumerable<Category> GetAllCategories()
         {
             List<Category> listCategory = new List<Category>();
@@ -45,7 +45,7 @@ namespace MVC_Adjacency_list_model.Models
         }
 
 
-        //updates root's left and right
+        //UPDATES ROOT'S LEFT AND RIGHT CORDS
         public void GetRootLftRgt(out int rootLft, out int rootRgt)
         {
             rootLft = 0;
@@ -55,14 +55,14 @@ namespace MVC_Adjacency_list_model.Models
             {
                 SqlCommand cmd = new SqlCommand("spSelectRoot", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
 
-                SqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())  //if there is more rows
-                {
-                    rootLft = Convert.ToInt32(rdr["lft"]);
-                    rootRgt = Convert.ToInt32(rdr["rgt"]);
-                }
+                con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        rootLft = Convert.ToInt32(rdr["lft"]);
+                        rootRgt = Convert.ToInt32(rdr["rgt"]);
+                    }
                 con.Close();
             }
         }
@@ -70,7 +70,7 @@ namespace MVC_Adjacency_list_model.Models
 
 
 
-        /////To get children- list of carriers 
+        /////TO GET CHILDREN- list of carriers 
         public List<CategoryCarrierViewModel> GetChildren(int lft, int rgt, List<CategoryCarrierViewModel> list)
         {
 
@@ -85,71 +85,41 @@ namespace MVC_Adjacency_list_model.Models
 
                 SqlDataReader rdr = cmd.ExecuteReader();
 
-                //JEDEN POZIOM
                 //if there are children with lft and rgt of parameter
                 while (rdr.Read())  
                 {
-                        //Debug.Write("Selected row inside while no.: " + rowInsideWhile + ", ");
-
-                    //gets one child (carrier)  of specified parameters
+                    //GETS ONE CHILD (CARRIER)  OF SPECIFIED PARAMETERS
                     CategoryCarrierViewModel categoryCarrier = new CategoryCarrierViewModel();
                     categoryCarrier.ID = Convert.ToInt32(rdr["ID"]);
                     categoryCarrier.Name = rdr["Name"].ToString();
                     categoryCarrier.lft = Convert.ToInt32(rdr["lft"]);
                     categoryCarrier.rgt = Convert.ToInt32(rdr["rgt"]);
 
-                        //Debug.Write("Actual name: " + categoryCarrier.Name + ", ");
-                        //Debug.Write("Actual lft: " + categoryCarrier.lft + ", ");
-                        //Debug.Write("Actual rgt: " + categoryCarrier.rgt + ", ");
-
-                    //adds one child- to parameter's list object
+                    //ADDS ONE CHILD- TO PARAMETER'S LIST OBJECT
                     list.Add(categoryCarrier);
 
-                    //change lft and rgt to current node
+                    //CHANGE LFT AND RGT TO CURRENT NODE
                     lft = categoryCarrier.lft;
                     rgt = categoryCarrier.rgt;
-                    //Debug.WriteLine("Current updated cords lft: " + lft + "Current updated cords rgt: " + rgt + ", ");
 
 
-
-                    //jesli głębiej są dzieci
+                    //IF THERE ARE CHILDREN DEEPER
                     if (CheckIfHasChildren(lft, rgt))
                     {
                         List<CategoryCarrierViewModel> newDeeperList = new List<CategoryCarrierViewModel>();
                         GetChildren(lft, rgt, newDeeperList);
-                        //Debug.WriteLine("ROW INSIDE WHILE" + rowInsideWhile);
                         list[rowInsideWhile].deeperList = newDeeperList;
                     }
                     rowInsideWhile++;
-
-
                 }
                 con.Close();
             }
             return list;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /////To check if has children
+        /////TO CHECK IF NODE HAS CHILDREN
         public bool CheckIfHasChildren(int lft, int rgt)
         {
-            //INITIALIZES LIST
-
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("spGetAllChildren", con);
@@ -164,10 +134,7 @@ namespace MVC_Adjacency_list_model.Models
         }
 
 
-
-
-
-        //Get the details of a particular employee  
+        //GET THE DETAILS OF A PARTICULAR EMPLOYEE  
         public Category GetCategoryData(int? id)
         {
             Category category = new Category();
@@ -185,15 +152,14 @@ namespace MVC_Adjacency_list_model.Models
                     category.rgt = Convert.ToInt32(rdr["rgt"]);
                     Debug.WriteLine(category.Name);
                     Debug.WriteLine(category.ID);
-
                 }
             }
-            return category;    //returnssingle object
+            return category;
         }
 
 
 
-        //To Update the records of a particluar category 
+        //TO RENAME NODE
         public void Rename(Category category)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -211,7 +177,7 @@ namespace MVC_Adjacency_list_model.Models
 
 
 
-        //To Add new node inside    
+        //TO ADD NEW NODE (inside another one)
         public void InsertInside(int IDWhere, string NameWhat)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -220,6 +186,8 @@ namespace MVC_Adjacency_list_model.Models
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@IDWhere", IDWhere);
                 cmd.Parameters.AddWithValue("@NameWhat", NameWhat);
+                cmd.Parameters.AddWithValue("@myLeft", 0);
+
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -228,7 +196,7 @@ namespace MVC_Adjacency_list_model.Models
         }
 
 
-        //To Update the records of a particluar category 
+        //TO DELETE NODE
         public void Delete(int id)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -239,8 +207,6 @@ namespace MVC_Adjacency_list_model.Models
                 cmd.Parameters.AddWithValue("@myLeft",0);
                 cmd.Parameters.AddWithValue("@myRight",0);
                 cmd.Parameters.AddWithValue("@myWidth",0);
-
-
 
                 con.Open();
                 cmd.ExecuteNonQuery();

@@ -21,7 +21,6 @@ namespace MVC_Adjacency_list_model.Controllers.Api
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-
             objCategory.Delete(id);
         }
     }
