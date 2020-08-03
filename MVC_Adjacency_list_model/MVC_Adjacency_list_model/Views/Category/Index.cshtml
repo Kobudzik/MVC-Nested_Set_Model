@@ -31,7 +31,6 @@
     @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font" })
     <a class="small-font" href="javascript:deleteScript(@item.ID);">🗑️</a>
     @Html.ActionLink("➕  ", "NewNode", "Category", new { id = item.ID }, new { @class = "small-font" })
-
 }
 
 
@@ -58,6 +57,7 @@
 @section scripts
 {
     <script>
+        //***********DELETING************\\
         function deleteScript(ID) {
             bootbox.confirm("Are you sure you want to delete this node?", function (bootboxResult) {
                 if (bootboxResult) {
@@ -71,31 +71,43 @@
                 }
             });
         }
+        //***********DELETING************\\
+
         $(document).ready(function () {
-            //***********DELETING************\\
-
-
-                //showing dialog box
-                
-
-
-         //***********DELETING************\\
-
-
             //***********TOGGLING************\\
             $('li:has(ul)').addClass('link');
             $('ul ul').addClass('subLink');
 
-            $('ul li').not(".small-font").click(function (toggle) {  // inserted callback param EVENT
+            $('ul li').click(function (toggle) {  // inserted callback param EVENT
                 toggle.stopPropagation(); // stop click from bubbling up
                 $(this).children('.subLink').toggle('slow');
             });
-        
-        //***********TOGGLING************\\
+
+          
+
+            //<a> toggling fix
+            $("#list a").click(function (e) {
+                e.stopPropagation();
+            });
+            //***********TOGGLING************\\         
 
 
-  
 
+
+
+
+            ////SORT
+            $('ul li').click(function (toggle) {  // inserted callback param EVENT
+                toggle.stopPropagation(); // stop click from bubbling up
+                $(this).children(".subLink").addClass("red");
+            });
+
+            
         });
+
+
+
+
+
     </script>
 }

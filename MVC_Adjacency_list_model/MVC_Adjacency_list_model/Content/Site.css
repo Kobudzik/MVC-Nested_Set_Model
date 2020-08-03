@@ -36,3 +36,9 @@ textarea {
 .small-font {
     font-size: xx-small;
 }
+
+.red {
+    color: red;
+    font-size:large;
+}
+
