@@ -29,7 +29,7 @@
 @helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel item)
 {
     @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font" })
-    <a class='small-font js-delete' data-node-id="@item.ID">🗑️</a>
+    <a class="small-font" href="javascript:deleteScript(@item.ID);">🗑️</a>
     @Html.ActionLink("➕  ", "NewNode", "Category", new { id = item.ID }, new { @class = "small-font" })
 
 }
@@ -58,36 +58,44 @@
 @section scripts
 {
     <script>
-        $(document).ready(function () {
-            //***********TOGGLING************\\
-            $('li:has(ul)').addClass('link');
-            $('ul ul').addClass('subLink');
-
-            $('ul li').not(".small-font").click(function (e) {  // inserted callback param EVENT
-                e.stopPropagation(); // stop click from bubbling up
-                $(this).children('.subLink').toggle('slow');
-            });
-        });
-        //***********TOGGLING************\\
-
-
-        //***********DELETING************\\
-        $("#list").on("click", ".js-delete", function () {
-            var link = $(this);
-
-            //showing dialog box
-            bootbox.confirm("Are you sure you want to delete this node?", function (result) {
-                if (result) {
+        function deleteScript(ID) {
+            bootbox.confirm("Are you sure you want to delete this node?", function (bootboxResult) {
+                if (bootboxResult) {
                     $.ajax({
-                        url: "/api/category/" + link.attr("data-node-id"),
+                        url: "/api/category/" + ID,
                         method: "DELETE",
-                        success: function () {
+                        success: function (bootboxSucces) {
                             location.reload();
                         }
                     });
                 }
             });
-        });
+        }
+        $(document).ready(function () {
+            //***********DELETING************\\
+
+
+                //showing dialog box
+                
+
+
          //***********DELETING************\\
+
+
+            //***********TOGGLING************\\
+            $('li:has(ul)').addClass('link');
+            $('ul ul').addClass('subLink');
+
+            $('ul li').not(".small-font").click(function (toggle) {  // inserted callback param EVENT
+                toggle.stopPropagation(); // stop click from bubbling up
+                $(this).children('.subLink').toggle('slow');
+            });
+        
+        //***********TOGGLING************\\
+
+
+  
+
+        });
     </script>
 }
