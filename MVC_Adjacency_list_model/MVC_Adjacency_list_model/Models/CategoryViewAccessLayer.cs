@@ -225,5 +225,27 @@ namespace MVC_Adjacency_list_model.Models
         }
 
 
+        //To Update the records of a particluar category 
+        public void Delete(int id)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spDeleteNodeById", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@myLeft",0);
+                cmd.Parameters.AddWithValue("@myRight",0);
+                cmd.Parameters.AddWithValue("@myWidth",0);
+
+
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+
+
     }
 }

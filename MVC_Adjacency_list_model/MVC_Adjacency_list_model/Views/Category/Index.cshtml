@@ -59,7 +59,8 @@
 @helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel item)
 {
     @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font" })
-    @Html.ActionLink("🗑️", "DeleteById", "Category", new { id = item.ID }, new { @class = "small-font" })
+    @*@Html.ActionLink("🗑️", "DeleteById", "Category", null, new { @class = "small-font js-delete data-node-id=" +@item.ID});*@
+    <a class='small-font js-delete' data-node-id="@item.ID" >🗑️</a>
     @*@Html.ActionLink("Delete By Name", "DeleteByName", "Category", new { id = item.ID }, null)
         @Html.ActionLink("(Insert Inside)", "InsertInside", "Category", new { id = item.ID }, null)
         @Html.ActionLink("(Insert Next To)", "InsertNextTo", "Category", new { id = item.ID }, null)*@
@@ -70,7 +71,7 @@
 
 
 
-<ul>
+<ul id="list">
     @*pierwszy poziom*@
     @foreach (var item in Model)
     {
@@ -86,14 +87,39 @@
 @section scripts
 {
     <script>
-        $(document).ready(function () {
-            $('li:has(ul)').addClass('link');
-            $('ul ul').addClass('subLink');
 
-            $('ul li').click(function (e) {  // inserted callback param EVENT
-                e.stopPropagation(); // stop click from bubbling up
-                $(this).children('.subLink').toggle('slow');
+        $("#list").on("click", ".js-delete", function () {
+            var link = $(this);
+
+            //wyswietlenie dialogu- komunikat,funkcja
+            bootbox.confirm("Are you sure you want to delete this node?", function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "/api/category/" + link.attr("data-node-id"),
+                        method: "DELETE",
+                        success: function () {
+                            location.reload();                           
+                        }
+                    });
+                }
             });
+
+        $(document).ready(function () {
+    
+            });
+
+            //$('li:has(ul)').addClass('link');
+            //$('ul ul').addClass('subLink');
+
+            //$('ul li').click(function (e) {  // inserted callback param EVENT
+            //    e.stopPropagation(); // stop click from bubbling up
+            //    $(this).children('.subLink').toggle('slow');
+            //});
+
+
+
+               
         });
+
     </script>
 }

@@ -80,13 +80,10 @@ namespace MVC_Adjacency_list_model.Controllers
         //POST   /category/edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Rename(int id, [Bind] Category category)
+        public ActionResult Rename(Category category)
         {
             //jeśli przesłane id nie jest równe ID zmienianemu obiektowi
-            if (id != category.ID)
-            {
-                return HttpNotFound();//ERROR
-            }
+   
             
             //if parameter object is not valid
             if (!ModelState.IsValid)
@@ -97,6 +94,10 @@ namespace MVC_Adjacency_list_model.Controllers
             objCategory.Rename(category);
             return RedirectToAction("Index");
         }
+
+
+
+        
 
 
 
