@@ -4,26 +4,21 @@
 @helper TreeView(List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel> categoryTree)
 {
 
-string leaf = null;
-if (categoryTree.Count() > 0)
-{
+    string leaf = null;
+    if (categoryTree.Count() > 0)
+    {
         @:<ul>
             foreach (var item in categoryTree)
-    {
-        if(item.deeperList.Count==0)
-        {
-            leaf = "leaf";
-        }
-        else
-        {
-            leaf = null;
-        }
-                    <li class="@leaf">
-                        @item.Name
-                        @DisplayMenu(item)
-                        @*sprawdza dalej*@
-                        @TreeView(item.deeperList)
-                    </li>
+            {
+                if (item.deeperList.Count == 0)
+                {
+                    leaf = "leaf";
+                }
+                else
+                {
+                    leaf = null;
+                }
+                <li class="@leaf">@item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList)</li>
             }
         @:</ul>
     }
@@ -33,42 +28,26 @@ if (categoryTree.Count() > 0)
 
 
 @helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel item)
-{
+{<div style="display: inline-block;" class= "display-menu">
     @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font" })
     <a class="small-font" href="javascript:deleteScript(@item.ID);">🗑️</a>
     @Html.ActionLink("➕  ", "NewNode", "Category", new { id = item.ID }, new { @class = "small-font" })
     <a class="small-font" id="newClick">sortNew</a>
-
+</div>
 }
 
 
 
-<h2>Here is tree structure saved using nested model</h2>
+<h2>Here is your structure as tree!</h2>
 <button class="btn navbar-btn">@Html.ActionLink("️Move node", "DeleteById", "Category", null)</button>
-<hr />
+<hr/>
 
 
 @Html.ActionLink("➕  ", "NewNode", "Category", new { id = 1 }, new { @class = "small-font" })
-<ul id="00">
-    @*pierwszy poziom*@
-    @foreach (var item in Model)
-    {
-        string leaf = null;
-        if (item.deeperList.Count == 0)
-        {
-            leaf = "leaf";
-        }
-        else
-        {
-            leaf = null;
-        }
-        <li class="@leaf">
-            @item.Name
-            @DisplayMenu(item)
-            @TreeView(item.deeperList)
-        </li>
-    }
-</ul>
+@*USE HELPER TO DISPLAY LIST*@
+<div id="listDiv">
+    @TreeView(Model)
+</div>
 
 
 @section scripts
@@ -101,9 +80,8 @@ if (categoryTree.Count() > 0)
             });
 
 
-
             //<a> toggling fix
-            $("#00 a").click(function (e) {
+            $("#listDiv a").click(function (e) {
                 e.stopPropagation();
             });
             //***********TOGGLING************\\
@@ -115,8 +93,8 @@ if (categoryTree.Count() > 0)
         });
 
         $('#newClick').click(function (toggle) {  // inserted callback param EVENT
-            toggle.stopPropagation(); // stop click from bubbling up
-            $("#00 :first-child li").addClass("red");
+            toggle.stopPropagation();
+            $("*").not(".leaf").addClass("red");
         });
 
 
