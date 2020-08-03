@@ -5,6 +5,7 @@
 {
 
     string leaf = null;
+    string leafSymbol = null;
     if (categoryTree.Count() > 0)
     {
         @:<ul>
@@ -13,12 +14,14 @@
                 if (item.deeperList.Count == 0)
                 {
                     leaf = "leaf";
+                    leafSymbol = "🍀";
                 }
                 else
                 {
                     leaf = null;
+                    leafSymbol = null;
                 }
-                <li class="@leaf">@item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList)</li>
+                <li class="@leaf" title="@leaf"> @leafSymbol @item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList)</li>
             }
         @:</ul>
     }
@@ -28,22 +31,23 @@
 
 
 @helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel item)
-{<div style="display: inline-block;" class= "display-menu">
-    @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font" })
-    <a class="small-font" href="javascript:deleteScript(@item.ID);">🗑️</a>
-    @Html.ActionLink("➕  ", "NewNode", "Category", new { id = item.ID }, new { @class = "small-font" })
-    <a class="small-font" id="newClick">sortNew</a>
-</div>
+{<div style="display: inline-block;" class="display-menu">
+        @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font", title = "Rename" })
+        <a class="small-font" title="Delete" href="javascript:deleteScript(@item.ID);">🗑️</a>
+        @Html.ActionLink("➕  ", "NewNode", "Category", new { id = item.ID }, new { @class = "small-font", title = "Add new" })
+        <a class="small-font" id="newClick">sortNew</a>
+    </div>
 }
 
 
 
 <h2>Here is your structure as tree!</h2>
 <button class="btn navbar-btn">@Html.ActionLink("️Move node", "DeleteById", "Category", null)</button>
-<hr/>
+<hr />
 
 
 @Html.ActionLink("➕  ", "NewNode", "Category", new { id = 1 }, new { @class = "small-font" })
+<a class="small-font" title="Toggle" id="toggleButton">[Toggle all]</a>
 @*USE HELPER TO DISPLAY LIST*@
 <div id="listDiv">
     @TreeView(Model)
@@ -68,9 +72,18 @@
             });
         }
         //***********DELETING************\\
+        $("#toggleButton").click(function () {
+            if ($('.subLink:visible').length)
+                $('.subLink').hide("fast");
+            else
+                $('.subLink').show("fast");
+        });
+
+
 
         $(document).ready(function () {
             //***********TOGGLING************\\
+
             $('li:has(ul)').addClass('link');
             $('ul ul').addClass('subLink');
 
@@ -94,7 +107,9 @@
 
         $('#newClick').click(function (toggle) {  // inserted callback param EVENT
             toggle.stopPropagation();
-            $("ul>li").not(".leaf").addClass("red");
+            $("li:first-child").addClass("red");
+            alert($("li:first-child").text());
+
         });
 
 
