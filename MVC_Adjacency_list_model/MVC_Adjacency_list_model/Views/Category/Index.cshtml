@@ -37,12 +37,11 @@
                 if (item != null)
                 {
                     @*Wyświetla name*@
-                    <li>
-                        @item.Name
-                        @*@DisplayMenu(item);*@
-                    </li>
-                    @*sprawdza dalej*@
-                    @TreeView(item.deeperList)
+              <li>
+                  @item.Name@*@DisplayMenu(item);*@
+                  @*sprawdza dalej*@
+                  @TreeView(item.deeperList)
+              </li>
                 }
             }
         @:</ul>
@@ -73,16 +72,24 @@
     @*pierwszy poziom*@
     @foreach (var item in Model)
     {
-        <li>
-            @item.Name
-            @*@DisplayMenu(item);*@
-        </li>
+    <li>
+        @item.Name@*@DisplayMenu(item);*@
         @TreeView(item.deeperList)
+    </li>
     }
 </ul>
 
 @section scripts
 {
     <script>
+        $(document).ready(function () {
+            $('li:has(ul)').addClass('link');
+            $('ul ul').addClass('subLink');
+
+            $('ul li').click(function (e) {  // inserted callback param EVENT
+                e.stopPropagation(); // stop click from bubbling up
+                $(this).children('.subLink').toggle('slow');
+            });
+        });
     </script>
 }
