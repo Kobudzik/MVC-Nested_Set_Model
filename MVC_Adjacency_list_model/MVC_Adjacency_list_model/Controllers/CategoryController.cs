@@ -1,5 +1,5 @@
 ﻿using Microsoft.Ajax.Utilities;
-using MVC_Adjacency_list_model.Dtos;
+using MVC_Adjacency_list_model.ViewModels;
 using MVC_Adjacency_list_model.Models;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace MVC_Adjacency_list_model.Controllers
         {
             int lft = 0;
             int rgt = 0;
-            List<CategoryCarrier> nestedList = new List<CategoryCarrier>();
+            List<CategoryCarrierViewModel> nestedList = new List<CategoryCarrierViewModel>();
             objCategory.GetRootLftRgt(out lft, out rgt);
             objCategory.GetChildren(lft, rgt, nestedList);
 

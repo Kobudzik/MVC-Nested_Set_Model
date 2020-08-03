@@ -1,5 +1,5 @@
 ﻿using Microsoft.Owin.Security.Provider;
-using MVC_Adjacency_list_model.Dtos;
+using MVC_Adjacency_list_model.ViewModels;
 using MVC_Adjacency_list_model.Models;
 using System;
 using System.Collections.Generic;
@@ -71,7 +71,7 @@ namespace MVC_Adjacency_list_model.Models
 
 
         /////To get children- list of carriers 
-        public List<CategoryCarrier> GetChildren(int lft, int rgt, List<CategoryCarrier> list)
+        public List<CategoryCarrierViewModel> GetChildren(int lft, int rgt, List<CategoryCarrierViewModel> list)
         {
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -92,7 +92,7 @@ namespace MVC_Adjacency_list_model.Models
                         Debug.Write("Selected row inside while no.: " + rowInsideWhile + ", ");
 
                     //gets one child (carrier)  of specified parameters
-                    CategoryCarrier categoryCarrier = new CategoryCarrier();
+                    CategoryCarrierViewModel categoryCarrier = new CategoryCarrierViewModel();
                     categoryCarrier.ID = Convert.ToInt32(rdr["ID"]);
                     categoryCarrier.Name = rdr["Name"].ToString();
                     categoryCarrier.lft = Convert.ToInt32(rdr["lft"]);
@@ -115,7 +115,7 @@ namespace MVC_Adjacency_list_model.Models
                     //jesli głębiej są dzieci
                     if (CheckIfHasChildren(lft, rgt))
                     {
-                        List<CategoryCarrier> newDeeperList = new List<CategoryCarrier>();
+                        List<CategoryCarrierViewModel> newDeeperList = new List<CategoryCarrierViewModel>();
                         GetChildren(lft, rgt, newDeeperList);
                         Debug.WriteLine("ROW INSIDE WHILE" + rowInsideWhile);
                         list[rowInsideWhile].deeperList = newDeeperList;
