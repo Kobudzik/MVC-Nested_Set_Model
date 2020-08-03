@@ -27,25 +27,27 @@
 
 @helper TreeView(List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel> categoryTree)
 {
-
-    foreach (var item in categoryTree)
+    if (categoryTree.Count() > 0)
     {
+        @:<ul>
+            foreach (var item in categoryTree)
+            {
 
-        @*jeśli obiekt głębiej istnieje*@
-        if (item != null)
-        {
-            //wcięcie
-            <ul class="ul_submenu">
-                @*Wyświetla name*@
-                <li>
-                    @item.Name
-                    @*@DisplayMenu(item);*@
-                </li>
-                @*sprawdza dalej*@
-                @TreeView(item.deeperList)
-            </ul>
-        }
+                @*jeśli obiekt głębiej istnieje*@
+                if (item != null)
+                {
+                    @*Wyświetla name*@
+                    <li>
+                        @item.Name
+                        @*@DisplayMenu(item);*@
+                    </li>
+                    @*sprawdza dalej*@
+                    @TreeView(item.deeperList)
+                }
+            }
+        @:</ul>
     }
+
 }
 
 
@@ -77,18 +79,10 @@
         </li>
         @TreeView(item.deeperList)
     }
-
 </ul>
 
 @section scripts
 {
     <script>
-
-        $('ul').click(function (e) {
-            e.preventDefault();
-            $(this).closest("li").find("[class^='ul_submenu']").slideToggle();
-           alert($(this).closest("li").find("[class^='ul_submenu']"));
-
-        });
     </script>
 }
