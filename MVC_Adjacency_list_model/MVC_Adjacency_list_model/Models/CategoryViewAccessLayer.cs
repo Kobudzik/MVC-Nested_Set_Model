@@ -45,7 +45,7 @@ namespace MVC_Adjacency_list_model.Models
         }
 
 
-        ///updates root's left and right
+        //updates root's left and right
         public void GetRootLftRgt(out int rootLft, out int rootRgt)
         {
             rootLft = 0;
@@ -89,7 +89,7 @@ namespace MVC_Adjacency_list_model.Models
                 //if there are children with lft and rgt of parameter
                 while (rdr.Read())  
                 {
-                        Debug.Write("Selected row inside while no.: " + rowInsideWhile + ", ");
+                        //Debug.Write("Selected row inside while no.: " + rowInsideWhile + ", ");
 
                     //gets one child (carrier)  of specified parameters
                     CategoryCarrierViewModel categoryCarrier = new CategoryCarrierViewModel();
@@ -98,9 +98,9 @@ namespace MVC_Adjacency_list_model.Models
                     categoryCarrier.lft = Convert.ToInt32(rdr["lft"]);
                     categoryCarrier.rgt = Convert.ToInt32(rdr["rgt"]);
 
-                        Debug.Write("Actual name: " + categoryCarrier.Name + ", ");
-                        Debug.Write("Actual lft: " + categoryCarrier.lft + ", ");
-                        Debug.Write("Actual rgt: " + categoryCarrier.rgt + ", ");
+                        //Debug.Write("Actual name: " + categoryCarrier.Name + ", ");
+                        //Debug.Write("Actual lft: " + categoryCarrier.lft + ", ");
+                        //Debug.Write("Actual rgt: " + categoryCarrier.rgt + ", ");
 
                     //adds one child- to parameter's list object
                     list.Add(categoryCarrier);
@@ -108,7 +108,7 @@ namespace MVC_Adjacency_list_model.Models
                     //change lft and rgt to current node
                     lft = categoryCarrier.lft;
                     rgt = categoryCarrier.rgt;
-                    Debug.WriteLine("Current updated cords lft: " + lft + "Current updated cords rgt: " + rgt + ", ");
+                    //Debug.WriteLine("Current updated cords lft: " + lft + "Current updated cords rgt: " + rgt + ", ");
 
 
 
@@ -117,7 +117,7 @@ namespace MVC_Adjacency_list_model.Models
                     {
                         List<CategoryCarrierViewModel> newDeeperList = new List<CategoryCarrierViewModel>();
                         GetChildren(lft, rgt, newDeeperList);
-                        Debug.WriteLine("ROW INSIDE WHILE" + rowInsideWhile);
+                        //Debug.WriteLine("ROW INSIDE WHILE" + rowInsideWhile);
                         list[rowInsideWhile].deeperList = newDeeperList;
                     }
                     rowInsideWhile++;
@@ -183,6 +183,9 @@ namespace MVC_Adjacency_list_model.Models
                     category.Name = rdr["Name"].ToString();
                     category.lft = Convert.ToInt32(rdr["lft"]);
                     category.rgt = Convert.ToInt32(rdr["rgt"]);
+                    Debug.WriteLine(category.Name);
+                    Debug.WriteLine(category.ID);
+
                 }
             }
             return category;    //returnssingle object

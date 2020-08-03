@@ -1,4 +1,4 @@
-﻿using Microsoft.Ajax.Utilities;
+﻿    using Microsoft.Ajax.Utilities;
 using MVC_Adjacency_list_model.ViewModels;
 using MVC_Adjacency_list_model.Models;
 using System;
@@ -30,27 +30,27 @@ namespace MVC_Adjacency_list_model.Controllers
             objCategory.GetRootLftRgt(out lft, out rgt);
             objCategory.GetChildren(lft, rgt, nestedList);
 
-            Debug.WriteLine("********************NEW************");
+            //Debug.WriteLine("********************NEW************");
 
-            foreach(var item in nestedList)///pierwszy poziom
-            {
-                Debug.WriteLine("FIRST: "+ item.Name); //wyswietlenie pierwszego poziomu
+            //foreach(var item in nestedList)///pierwszy poziom
+            //{
+            //    Debug.WriteLine("FIRST: "+ item.Name); //wyswietlenie pierwszego poziomu
 
 
-                if(item.deeperList != null)//jeśli jest drugi poziom
-                {
-                    foreach (var deeperItem in item.deeperList) //petla drugiego poziomu
-                    {
-                        Debug.WriteLine("SECOND: " + deeperItem.Name); //wyświetlenie drugiego poziomu
+            //    if(item.deeperList != null)//jeśli jest drugi poziom
+            //    {
+            //        foreach (var deeperItem in item.deeperList) //petla drugiego poziomu
+            //        {
+            //            Debug.WriteLine("SECOND: " + deeperItem.Name); //wyświetlenie drugiego poziomu
 
-                        if (deeperItem.deeperList!=null)// jeśli jest trzeci poziom
-                            foreach (var evenDeeperItem in deeperItem.deeperList)//petla trzeciego poziomu
-                            {
-                              Debug.WriteLine("THIRD: " + evenDeeperItem.Name);//wyświetlenie trzeciego poziomu
-                            }
-                    }
-                }
-            }
+            //            if (deeperItem.deeperList!=null)// jeśli jest trzeci poziom
+            //                foreach (var evenDeeperItem in deeperItem.deeperList)//petla trzeciego poziomu
+            //                {
+            //                  Debug.WriteLine("THIRD: " + evenDeeperItem.Name);//wyświetlenie trzeciego poziomu
+            //                }
+            //        }
+            //    }
+            //}
             return View(nestedList);
         }
         
@@ -67,7 +67,7 @@ namespace MVC_Adjacency_list_model.Controllers
             //gets data of one node to display it to user
             Category category = objCategory.GetCategoryData(id);
 
-            if (category == null)
+            if (category.ID==0 || category.Name=="ROOT")
             {
                 return HttpNotFound();//ERROR
             }
