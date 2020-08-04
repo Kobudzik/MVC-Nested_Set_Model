@@ -5,25 +5,23 @@
 
 @helper TreeView(List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel> categoryTree, int counter)
 {
-    string leaf = null;
-    string leafSymbol = null;
-    if (categoryTree.Count() > 0)
-    {
-        counter++;
+string typeClass = null;
+if (categoryTree.Count() > 0)
+{
+    counter++;
         @:<ul>
             foreach (var item in categoryTree)
-            {
-                if (item.deeperList.Count == 0)
-                {
-                    leaf = "leaf";
-                    leafSymbol = null;
-                }
-                else
-                {
-                    leaf = null;
-                    leafSymbol = "▼";
-                }
-                <li class="@leaf" title="@leaf" data-my-content="@item.Name" data-my-level="@counter"> @leafSymbol @item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList, counter)</li>
+    {
+        //jeśli jest liściem
+        if (item.deeperList.Count == 0)
+        {
+            typeClass = "leaf";
+        }
+        else
+        {
+            typeClass = "node";
+        }
+                <li class="@typeClass"  data-my-content="@item.Name" data-my-level="@counter">@item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList, counter)</li>
             }
         @:</ul>
     }
@@ -55,7 +53,10 @@
 
 <h2>Here is your structure as a tree!</h2>
 <hr />
-<button class="btn navbar-btn">@Html.ActionLink("️Move node", "MoveNode", "Category", null)</button>
+<a href="/Category/MoveNode" class="btn btn-primary" style="padding: 5px 5px; font-size:x-small">Move node</a>
+
+
+
 
 
 
@@ -118,16 +119,16 @@
         });
 
 
-        $('#newClick').click(function (toggle) {  // inserted callback param EVENT
-            toggle.stopPropagation();
-            $(this).first(".subLink").addClass("red");
-            var inside = $("li:first-child");
+        //$('#newClick').click(function (toggle) {  // inserted callback param EVENT
+        //    toggle.stopPropagation();
+        //    $(this).first(".subLink").addClass("red");
+        //    var inside = $("li:first-child");
 
-            inside.each(function () {
-                alert($(this).attr("data-my-content"));
-            });
+        //    inside.each(function () {
+        //        alert($(this).attr("data-my-content"));
+        //    });
 
-        });
+        //});
 
 
 
