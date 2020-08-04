@@ -1,0 +1,46 @@
+﻿@model MVC_Adjacency_list_model.ViewModels.MoveNodeViewModel
+
+@{
+    ViewBag.Title = "Move Node";
+}
+
+
+<h2>Move node.</h2>
+<hr />
+
+@using (Html.BeginForm("MoveNode", "Category"))
+{
+
+    <div class="form-group">
+        <label>Node to move:</label>
+        <p>
+            @Html.DropDownListFor(m => m.nodeID, new SelectList(Model.allNameList, "ID", "Name"))
+            @Html.ValidationMessageFor(m => m.nodeID)
+        </p>
+    </div>
+
+
+
+    <div class="form-group">
+        <label>New parent node:</label>
+        <p>
+            @Html.DropDownListFor(m => m.newParentID, new SelectList(Model.allNameList, "ID", "Name"))
+            @Html.ValidationMessageFor(m => m.newParentID)
+        </p>
+    </div>
+
+
+
+
+    @Html.AntiForgeryToken()
+
+    //SENDS POST REQUEST
+    <button type="submit" class="btn btn-primary">Move</button>
+}
+
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/ bundles/jqueryval")}

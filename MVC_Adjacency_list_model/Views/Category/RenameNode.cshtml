@@ -1,0 +1,31 @@
+﻿@model MVC_Adjacency_list_model.Models.Category
+@{
+    ViewBag.Title = "Rename Node";
+}
+<h2>Rename "@Model.Name".</h2>
+<hr />
+
+
+@using (Html.BeginForm("RenameNode", "Category"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    @Html.HiddenFor(m => m.ID);
+    @Html.AntiForgeryToken()
+
+    //SENDS POST REQUEST
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/Category" class="btn btn-primary">Cancel</a>
+}
+
+
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/ bundles / jqueryval")}
