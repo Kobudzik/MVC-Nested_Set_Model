@@ -267,10 +267,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\Rename.cshtml" />
+    <Content Include="Views\Category\RenameNode.cshtml" />
     <Content Include="Views\Category\NewNode.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
-    <Content Include="Views\Category\Move.cshtml" />
+    <Content Include="Views\Category\MoveNode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

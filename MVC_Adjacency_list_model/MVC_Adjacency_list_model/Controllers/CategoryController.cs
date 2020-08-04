@@ -1,13 +1,8 @@
-﻿using Microsoft.Ajax.Utilities;
-using MVC_Adjacency_list_model.ViewModels;
+﻿using MVC_Adjacency_list_model.ViewModels;
 using MVC_Adjacency_list_model.Models;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
 using System.Web.Mvc;
-using System.Web.Http.Validation;
 
 namespace MVC_Adjacency_list_model.Controllers
 {
@@ -29,7 +24,7 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET   /category/Edit/ID
         [HttpGet]
-        public ActionResult Rename(int? id)
+        public ActionResult RenameNode(int? id)
         {
             if (id == null)
             {
@@ -51,7 +46,7 @@ namespace MVC_Adjacency_list_model.Controllers
         //POST   /category/edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Rename(Category category)
+        public ActionResult RenameNode(Category category)
         {
             //if parameter object is not valid
             if (!ModelState.IsValid)
@@ -102,7 +97,7 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET /category/Move
         [HttpGet]
-        public ActionResult Move()
+        public ActionResult MoveNode()
         {
             //gets data of one node to display it to user
             MoveNodeViewModel moveNodeViewModel = new MoveNodeViewModel
@@ -117,7 +112,7 @@ namespace MVC_Adjacency_list_model.Controllers
         //POST   /category/move
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Move(MoveNodeViewModel moveNodeViewModel)
+        public ActionResult MoveNode(MoveNodeViewModel moveNodeViewModel)
         {
             //if parameter object is not valid
             if (!ModelState.IsValid)

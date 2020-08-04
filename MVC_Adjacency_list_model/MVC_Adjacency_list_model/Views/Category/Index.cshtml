@@ -1,5 +1,7 @@
 ﻿@model List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel>
-
+@{
+    ViewBag.Title = "Tree";
+}
 
 @helper TreeView(List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel> categoryTree, int counter)
 {
@@ -10,17 +12,17 @@
         counter++;
         @:<ul>
             foreach (var item in categoryTree)
-    {
-        if (item.deeperList.Count == 0)
-        {
-            leaf = "leaf";
-            leafSymbol = null;
-        }
-        else
-        {
-            leaf = null;
-            leafSymbol = "▼";
-        }
+            {
+                if (item.deeperList.Count == 0)
+                {
+                    leaf = "leaf";
+                    leafSymbol = null;
+                }
+                else
+                {
+                    leaf = null;
+                    leafSymbol = "▼";
+                }
                 <li class="@leaf" title="@leaf" data-my-content="@item.Name" data-my-level="@counter"> @leafSymbol @item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList, counter)</li>
             }
         @:</ul>
@@ -33,7 +35,7 @@
 @helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel item)
 {<div style="display: inline-block;" class="display-menu">
         @*RENAME BUTTON*@
-        @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font", title = "Rename" })
+        @Html.ActionLink("✏️  ", "RenameNode", "Category", new { id = item.ID }, new { @class = "small-font", title = "Rename" })
 
         @*DELETE BUTTON*@
         <a class="small-font" title="Delete" href="javascript:deleteScript(@item.ID);">🗑️</a>
@@ -51,13 +53,13 @@
 
 
 
-<h2>Here is your structure as tree!</h2>
+<h2>Here is your structure as a tree!</h2>
 <hr />
-<button class="btn navbar-btn">@Html.ActionLink("️Move node", "Move", "Category", null)</button>
+<button class="btn navbar-btn">@Html.ActionLink("️Move node", "MoveNode", "Category", null)</button>
 
 
 
-@Html.ActionLink("➕  ", "NewNode", "Category", new { id = 1 }, new {title = "New Root Node" })
+@Html.ActionLink("➕  ", "NewNode", "Category", new { id = 1 }, new { title = "New Root Node" })
 <a title="Toggle" id="toggleButton">[Toggle all]</a>
 @*USE HELPER TO DISPLAY LIST*@
 <div id="listDiv">
