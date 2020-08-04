@@ -11,9 +11,6 @@ namespace MVC_Adjacency_list_model.Models
     {
         public int ID { get; set; }
 
-
-
-        //[Required(ErrorMessage = "Please enter customer's name.")]
         [Required]
         [MaxLength(30)]
         public string Name { get; set; }

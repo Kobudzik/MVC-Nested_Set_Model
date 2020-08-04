@@ -14,18 +14,14 @@ namespace MVC_Adjacency_list_model.Controllers
     public class CategoryController : Controller
     {
 
-        CategoryViewAccessLayer objCategory = new CategoryViewAccessLayer();
-
-
+        private CategoryViewAccessLayer objCategory = new CategoryViewAccessLayer();
         
         //GET  /category
         //GET  /category/index
         public ActionResult Index()
         {
-            int lft = 0;
-            int rgt = 0;
             List<CategoryCarrierViewModel> nestedList = new List<CategoryCarrierViewModel>();
-            objCategory.GetRootLftRgt(out lft, out rgt);
+            objCategory.GetRootLftRgt(out int lft, out int rgt);
             objCategory.GetChildren(lft, rgt, nestedList);
             return View(nestedList);
         }
@@ -47,7 +43,6 @@ namespace MVC_Adjacency_list_model.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(category);
         }
 
@@ -60,10 +55,9 @@ namespace MVC_Adjacency_list_model.Controllers
         {
             //if parameter object is not valid
             if (!ModelState.IsValid)
-            { 
-                return View(category);        
+            {
+                return View(category);
             }
-
             objCategory.Rename(category);
             return RedirectToAction("Index");
         }
@@ -77,12 +71,11 @@ namespace MVC_Adjacency_list_model.Controllers
             {
                 return HttpNotFound();
             }
-
             //gets data of one node to display it to user
             Category categoryInDB = objCategory.GetCategoryData(id);
 
             //if object doesn't exist
-            if (categoryInDB.ID!=id)
+            if (categoryInDB.ID != id)
             {
                 Debug.Write("OBJECT DOESNT EXIST!");
                 return HttpNotFound();
@@ -112,8 +105,11 @@ namespace MVC_Adjacency_list_model.Controllers
         public ActionResult Move()
         {
             //gets data of one node to display it to user
-            MoveNodeViewModel moveNodeViewModel = new MoveNodeViewModel();
-            moveNodeViewModel.allNameList = objCategory.GetAllCategories();
+            MoveNodeViewModel moveNodeViewModel = new MoveNodeViewModel
+            {
+                allNameList = objCategory.GetAllCategories()
+            };
+
             return View(moveNodeViewModel);
         }
 
@@ -129,14 +125,8 @@ namespace MVC_Adjacency_list_model.Controllers
                 moveNodeViewModel.allNameList = objCategory.GetAllCategories();
                 return View("Move", moveNodeViewModel);
             }
-
-            Debug.WriteLine("NewParent= " + moveNodeViewModel.nodeID.ToString());
-            Debug.WriteLine("NewParent= " + moveNodeViewModel.newParentID.ToString());
             objCategory.Move(moveNodeViewModel.nodeID, moveNodeViewModel.newParentID);
             return RedirectToAction("Index", moveNodeViewModel);
         }
-
-
-
     }
 }

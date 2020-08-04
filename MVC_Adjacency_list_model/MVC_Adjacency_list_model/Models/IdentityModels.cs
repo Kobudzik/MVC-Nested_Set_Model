@@ -20,7 +20,9 @@ namespace MVC_Adjacency_list_model.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //My table
         public DbSet<Category> Categories { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

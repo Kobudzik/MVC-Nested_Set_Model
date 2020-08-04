@@ -15,7 +15,7 @@ namespace MVC_Adjacency_list_model.Controllers.Api
         [HttpDelete]
         public void DeleteNode(int id)
         {
-            var nodeInDb = objCategory.GetCategoryData(id);
+            Category nodeInDb = objCategory.GetCategoryData(id);
 
             if (nodeInDb == null)
             {
