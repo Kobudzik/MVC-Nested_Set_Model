@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.Http.Validation;
 
 namespace MVC_Adjacency_list_model.Controllers
 {
@@ -125,9 +126,8 @@ namespace MVC_Adjacency_list_model.Controllers
             //if parameter object is not valid
             if (!ModelState.IsValid)
             {
-                Debug.WriteLine("STATE INVALID");
-
-                return View(moveNodeViewModel);
+                moveNodeViewModel.allNameList = objCategory.GetAllCategories();
+                return View("Move", moveNodeViewModel);
             }
 
             Debug.WriteLine("NewParent= " + moveNodeViewModel.nodeID.ToString());

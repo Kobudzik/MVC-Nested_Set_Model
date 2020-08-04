@@ -4,16 +4,12 @@
 
 @using (Html.BeginForm("Move", "Category"))
 {
+
     <div class="form-group">
         <label>Node to move</label>
         <p>
-            @Html.DropDownListFor(
-                m => m.nodeID,
-                new SelectList(Model.allNameList, "ID", "Name"),
-                "Select node to move"
-            )
-
-
+            @Html.DropDownListFor(m => m.nodeID, new SelectList(Model.allNameList, "ID", "Name"))
+            @Html.ValidationMessageFor(m => m.nodeID)
         </p>
     </div>
 
@@ -22,11 +18,8 @@
     <div class="form-group">
         <label>New parent node</label>
         <p>
-            @Html.DropDownListFor(
-                m => m.newParentID,
-                new SelectList(Model.allNameList, "ID", "Name"),
-                "Select node to move"
-            )
+            @Html.DropDownListFor(m => m.newParentID, new SelectList(Model.allNameList, "ID", "Name"))
+            @Html.ValidationMessageFor(m => m.newParentID)
         </p>
     </div>
 
@@ -44,4 +37,4 @@
 
 @section scripts
 {
-    @Scripts.Render("~/ bundles / jqueryval")}
+    @Scripts.Render("~/ bundles/jqueryval")}

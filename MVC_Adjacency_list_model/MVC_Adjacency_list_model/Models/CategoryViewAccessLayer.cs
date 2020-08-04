@@ -215,7 +215,7 @@ namespace MVC_Adjacency_list_model.Models
 
 
 
-        public void Move(int nodeID, int newParentID )
+        public void Move(int? nodeID, int? newParentID )
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
