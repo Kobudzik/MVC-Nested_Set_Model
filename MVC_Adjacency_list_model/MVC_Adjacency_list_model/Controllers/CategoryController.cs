@@ -106,6 +106,36 @@ namespace MVC_Adjacency_list_model.Controllers
 
 
 
+        //GET /category/Move
+        [HttpGet]
+        public ActionResult Move()
+        {
+            //gets data of one node to display it to user
+            MoveNodeViewModel moveNodeViewModel = new MoveNodeViewModel();
+            moveNodeViewModel.allNameList = objCategory.GetAllCategories();
+            return View(moveNodeViewModel);
+        }
+
+
+        //POST   /category/move
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Move(MoveNodeViewModel moveNodeViewModel)
+        {
+            //if parameter object is not valid
+            if (!ModelState.IsValid)
+            {
+                Debug.WriteLine("STATE INVALID");
+
+                return View(moveNodeViewModel);
+            }
+
+            Debug.WriteLine("NewParent= " + moveNodeViewModel.nodeID.ToString());
+            Debug.WriteLine("NewParent= " + moveNodeViewModel.newParentID.ToString());
+            objCategory.Move(moveNodeViewModel.nodeID, moveNodeViewModel.newParentID);
+            return RedirectToAction("Index", moveNodeViewModel);
+        }
+
 
 
     }

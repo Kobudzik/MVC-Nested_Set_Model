@@ -23,5 +23,10 @@ namespace MVC_Adjacency_list_model.Models
 
         [Required]
         public int rgt { get; set; }
+
+        public override string ToString()
+        {
+            return ("ID= " + ID + ", Name= " +Name + ", lft= "+lft + ", rgt= "+ rgt);
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace MVC_Adjacency_list_model.Models
 {
@@ -18,7 +19,7 @@ namespace MVC_Adjacency_list_model.Models
 
 
         /////To View all Categories details    NOT USED
-        public IEnumerable<Category> GetAllCategories()
+        public List<Category> GetAllCategories()
         {
             List<Category> listCategory = new List<Category>();
 
@@ -134,7 +135,7 @@ namespace MVC_Adjacency_list_model.Models
         }
 
 
-        //GET THE DETAILS OF A PARTICULAR EMPLOYEE  
+        //GET THE DETAILS OF A PARTICULAR CHILDREN  
         public Category GetCategoryData(int? id)
         {
             Category category = new Category();
@@ -150,8 +151,6 @@ namespace MVC_Adjacency_list_model.Models
                     category.Name = rdr["Name"].ToString();
                     category.lft = Convert.ToInt32(rdr["lft"]);
                     category.rgt = Convert.ToInt32(rdr["rgt"]);
-                    Debug.WriteLine(category.Name);
-                    Debug.WriteLine(category.ID);
                 }
             }
             return category;
@@ -213,6 +212,37 @@ namespace MVC_Adjacency_list_model.Models
                 con.Close();
             }
         }
+
+
+
+        public void Move(int nodeID, int newParentID )
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                Category node = GetCategoryData(nodeID);
+                Debug.WriteLine(node.ToString());
+                Category newParent = GetCategoryData(newParentID);
+                Debug.WriteLine(newParent.ToString());
+
+
+                SqlCommand cmd = new SqlCommand("spMoveNode", con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@node_id",node.ID );
+                        cmd.Parameters.AddWithValue("@node_pos_left", node.lft);
+                        cmd.Parameters.AddWithValue("@node_pos_right", node.rgt);
+
+                        cmd.Parameters.AddWithValue("@new_parent_ID", newParent.ID);
+                        cmd.Parameters.AddWithValue("@new_parent_pos_right", newParent.rgt);
+
+                        cmd.Parameters.AddWithValue("@node_size", 0);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+            }
+        }
+
 
 
 
