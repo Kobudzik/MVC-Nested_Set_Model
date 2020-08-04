@@ -28,5 +28,7 @@ namespace MVC_Adjacency_list_model.ViewModels
         {
             deeperList = new List<CategoryCarrierViewModel>();
         }
+
+
     }
 }

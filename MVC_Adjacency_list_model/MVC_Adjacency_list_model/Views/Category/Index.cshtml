@@ -1,13 +1,13 @@
 ﻿@model List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel>
 
 
-@helper TreeView(List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel> categoryTree)
+@helper TreeView(List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel> categoryTree, int counter)
 {
-
-    string leaf = null;
-    string leafSymbol = null;
-    if (categoryTree.Count() > 0)
-    {
+string leaf = null;
+string leafSymbol = null;
+if (categoryTree.Count() > 0)
+{
+    counter++;
         @:<ul>
             foreach (var item in categoryTree)
             {
@@ -21,7 +21,7 @@
                     leaf = null;
                     leafSymbol = null;
                 }
-                <li class="@leaf" title="@leaf"> @leafSymbol @item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList)</li>
+                <li class="@leaf" title="@leaf" data-my-content="@item.Name" data-my-level="@counter"> @leafSymbol @item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList,counter)</li>
             }
         @:</ul>
     }
@@ -32,10 +32,20 @@
 
 @helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel item)
 {<div style="display: inline-block;" class="display-menu">
+        @*RENAME BUTTON*@
         @Html.ActionLink("✏️  ", "Rename", "Category", new { id = item.ID }, new { @class = "small-font", title = "Rename" })
+
+        @*DELETE BUTTON*@
         <a class="small-font" title="Delete" href="javascript:deleteScript(@item.ID);">🗑️</a>
+
+         @*//NEW_NODE BUTTON*@
         @Html.ActionLink("➕  ", "NewNode", "Category", new { id = item.ID }, new { @class = "small-font", title = "Add new" })
-        <a class="small-font" id="newClick">sortNew</a>
+
+        @*//SORT BUTTON*@
+        @if (item.deeperList.Count != 0)
+        {
+            <a class="small-font" id="newClick">sort</a>
+        }
     </div>
 }
 
@@ -50,7 +60,7 @@
 <a class="small-font" title="Toggle" id="toggleButton">[Toggle all]</a>
 @*USE HELPER TO DISPLAY LIST*@
 <div id="listDiv">
-    @TreeView(Model)
+    @TreeView(Model,0)
 </div>
 
 
@@ -72,18 +82,22 @@
             });
         }
         //***********DELETING************\\
+
+        //***********TOGGLING_ALL************\\
+
         $("#toggleButton").click(function () {
             if ($('.subLink:visible').length)
                 $('.subLink').hide("fast");
             else
                 $('.subLink').show("fast");
         });
+        //***********TOGGLING_ALL************\\
+
 
 
 
         $(document).ready(function () {
-            //***********TOGGLING************\\
-
+            //***********TOGGLING_SING:E************\\
             $('li:has(ul)').addClass('link');
             $('ul ul').addClass('subLink');
 
@@ -97,18 +111,18 @@
             $("#listDiv a").click(function (e) {
                 e.stopPropagation();
             });
-            //***********TOGGLING************\\
-
-
-
-
-
+            //***********TOGGLING_SINGLE************\\
         });
+
 
         $('#newClick').click(function (toggle) {  // inserted callback param EVENT
             toggle.stopPropagation();
-            $("li:first-child").addClass("red");
-            alert($("li:first-child").text());
+            $(this).first(".subLink").addClass("red");
+            var inside = $("li:first-child");
+
+            inside.each(function () {
+                alert($(this).attr("data-my-content"));
+            });
 
         });
 
