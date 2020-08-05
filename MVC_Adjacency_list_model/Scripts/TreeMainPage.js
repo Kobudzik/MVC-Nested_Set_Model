@@ -54,18 +54,26 @@ $('.newClick').click(function () {  // inserted callback param EVENT
     //wybranie rodziców 2 poziomy wyżej
     var parents = $(this).parents().eq(1);
 
-    //current depth klikniętego obiektu
+    //current depth of clicked object
     var parentDepth = parseInt(parents.first("li").attr("data-my-level"));
 
-    var intChildDepth = parseInt(parentDepth);
-    intChildDepth += 1;
-    alert(intChildDepth);
+    //depth of clicked object's child
+    var intChildDepth = parseInt(parentDepth) + 1;
 
     //only lower LI children
-    var lowerLiChild = parents.find("li[data-my-level=" + intChildDepth+"]").each(
-        function () {
-                $(this).addClass("red");
-        });
+    var lowerLiChildren = parents.find("li[data-my-level=" + intChildDepth + "]");
 
+    function uCase(param) {
+        return $(param).text().toUpperCase();
+    }
 
-});
+    function compareAlphabetically(a, b) {
+        var firstString = uCase($(a).first());
+        var secondString = uCase($(b).first());
+        return (firstString > secondString) ? 1 : -1; //ORDER
+    }
+
+    lowerLiChildren.sort(compareAlphabetically).each(function () {
+        this.parentNode.appendChild(this);
+    });
+})
