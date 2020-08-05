@@ -9,15 +9,15 @@ namespace MVC_Adjacency_list_model.Controllers
     public class CategoryController : Controller
     {
 
-        private CategoryRepository objCategory = new CategoryRepository();
+        private CategoryRepository myRepo = new CategoryRepository();
         
         //GET  /category
         //GET  /category/index
         public ActionResult Index()
         {            
             List<Category> nestedList = new List<Category>();
-            objCategory.GetRootCords(out int lft, out int rgt);
-            objCategory.GetChildren(lft, rgt, nestedList);
+            myRepo.GetRootCords(out int lft, out int rgt);
+            myRepo.GetChildren(lft, rgt, nestedList);
 
             if (User.IsInRole("Administrator"))
             {
@@ -39,7 +39,7 @@ namespace MVC_Adjacency_list_model.Controllers
             }
 
             //gets data of one category to display it to user
-            Category category = objCategory.GetSingle(id);
+            Category category = myRepo.GetSingle(id);
 
             if (category.ID==0 || category.Name=="ROOT")
             {
@@ -61,7 +61,7 @@ namespace MVC_Adjacency_list_model.Controllers
             {
                 return View(category);
             }
-            objCategory.Rename(category);
+            myRepo.Rename(category);
             return RedirectToAction("Index");
         }
 
@@ -76,7 +76,7 @@ namespace MVC_Adjacency_list_model.Controllers
                 return HttpNotFound();
             }
             //gets data of one category to display it to user
-            Category categoryInDB = objCategory.GetSingle(id);
+            Category categoryInDB = myRepo.GetSingle(id);
 
             //if object doesn't exist
             if (categoryInDB.ID != id)
@@ -99,7 +99,7 @@ namespace MVC_Adjacency_list_model.Controllers
             {
                 return View(category);
             }
-            objCategory.InsertInside(category.ID, category.Name);
+            myRepo.InsertInside(category.ID, category.Name);
             return RedirectToAction("Index");
         }
 
@@ -113,7 +113,7 @@ namespace MVC_Adjacency_list_model.Controllers
             //gets data of one category to display it to user
             MoveCategoryViewModel viewModel = new MoveCategoryViewModel
             {
-                allCategoriesList = objCategory.GetAll()
+                allCategoriesList = myRepo.GetAll()
             };
 
             return View(viewModel);
@@ -129,11 +129,11 @@ namespace MVC_Adjacency_list_model.Controllers
             //if parameter object is not valid
             if (!ModelState.IsValid)
             {
-                viewModel.allCategoriesList = objCategory.GetAll();
+                viewModel.allCategoriesList = myRepo.GetAll();
                 return View("MoveCategory", viewModel);
             }
 
-            objCategory.Move(viewModel.MovingNodeID, viewModel.NewParentID);
+            myRepo.Move(viewModel.MovingNodeID, viewModel.NewParentID);
             return RedirectToAction("Index", viewModel);
         }
     }

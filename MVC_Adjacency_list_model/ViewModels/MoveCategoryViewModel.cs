@@ -11,6 +11,7 @@ namespace MVC_Adjacency_list_model.ViewModels
     {
         [Required]
         [MovingParentCheck]
+        [NewCheck]
         public int? MovingNodeID { get; set; }
 
         [Required]
