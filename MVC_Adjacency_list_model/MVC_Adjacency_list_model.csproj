@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202008050655152_SeedUsers.Designer.cs">
       <DependentUpon>202008050655152_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008051657094_SeedRootCategory.cs" />
+    <Compile Include="Migrations\202008051657094_SeedRootCategory.Designer.cs">
+      <DependentUpon>202008051657094_SeedRootCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ICategoryRepository.cs" />
     <Compile Include="Models\MovingParentCheck.cs" />
     <Compile Include="Models\MovingCategoryCheck.cs" />
@@ -309,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008050655152_SeedUsers.resx">
       <DependentUpon>202008050655152_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008051657094_SeedRootCategory.resx">
+      <DependentUpon>202008051657094_SeedRootCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
