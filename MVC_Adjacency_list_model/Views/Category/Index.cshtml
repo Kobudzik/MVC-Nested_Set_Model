@@ -1,14 +1,14 @@
-﻿@model List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel>
+﻿@model List<MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel>
 @{
     ViewBag.Title = "Tree";
 }
 
-@helper TreeView(List<MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel> categoryTree, int counter)
+@helper TreeView(List<MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel> categoryTree, int depth)
 {
     string typeClass = null;
     if (categoryTree.Count() > 0)
     {
-        counter++;
+        depth++;
         @:<ul>
             foreach (var item in categoryTree)
             {
@@ -21,25 +21,24 @@
                 {
                     typeClass = "node";
                 }
-                <li class="@typeClass" data-my-content="@item.Name" data-my-level="@counter">@item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList, counter)</li>
+                <li class="@typeClass" data-my-content="@item.Name" data-my-level="@depth">@item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList, depth)</li>
             }
         @:</ul>
     }
 
 }
 
-
-
-@helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.CategoryCarrierViewModel item)
-{<div style="display: inline-block;" class="display-menu">
+@helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
+{
+    <div style="display: inline-block;" class="display-menu">
         @*RENAME BUTTON*@
-        @Html.ActionLink("✏️  ", "RenameNode", "Category", new { id = item.ID }, new { @class = "small-font", title = "Rename" })
+        @Html.ActionLink("✏️  ", "RenameCategory", "Category", new { id = item.ID }, new { @class = "small-font", title = "Rename" })
 
         @*DELETE BUTTON*@
         <a class="small-font" title="Delete" href="javascript:deleteCategory(@item.ID);">🗑️</a>
 
         @*//NEW_NODE BUTTON*@
-        @Html.ActionLink("➕  ", "NewNode", "Category", new { id = item.ID }, new { @class = "small-font", title = "Add new" })
+        @Html.ActionLink("➕  ", "NewCategory", "Category", new { id = item.ID }, new { @class = "small-font", title = "Add new" })
 
         @*//SORT BUTTON*@
         @if (item.deeperList.Count > 1)
@@ -49,30 +48,23 @@
     </div>
 }
 
-
-
-<h2>Here is your structure as a tree!</h2>
+<h2>Here is your DB structure as a tree!</h2>
 <hr />
-<a href="/Category/MoveNode" class="btn btn-primary" style="padding: 5px 5px; font-size:x-small">Move node</a>
+<a href="/Category/MoveCategory" class="btn btn-primary" style="padding: 5px 5px; font-size:x-small">Move category</a>
 
-
-
-
-
-
-@Html.ActionLink("➕  ", "NewNode", "Category", new { id = 1 }, new { title = "New Root Node" })
+@Html.ActionLink("➕  ", "NewCategory", "Category", new { id = 1 }, new { title = "New Root Category" })
 <a title="Toggle" id="toggleButton">[Toggle all]</a>
 @*USE HELPER TO DISPLAY LIST*@
-<div id="listDiv">
+<div id="listDiv" style="font-size:large">
     @TreeView(Model, 0)
 </div>
 
 
-@Scripts.Render(
-  "~/bundles/TreeScripts")
+
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/TreeScripts")
     <script>
         $(document).ready(function () {
             AddListClasses();

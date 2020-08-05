@@ -9,13 +9,13 @@ namespace MVC_Adjacency_list_model.Controllers
     public class CategoryController : Controller
     {
 
-        private CategoryViewAccessLayer objCategory = new CategoryViewAccessLayer();
+        private CategoryAccessLayer objCategory = new CategoryAccessLayer();
         
         //GET  /category
         //GET  /category/index
         public ActionResult Index()
         {
-            List<CategoryCarrierViewModel> nestedList = new List<CategoryCarrierViewModel>();
+            List<NestedCategoriesViewModel> nestedList = new List<NestedCategoriesViewModel>();
             objCategory.GetRootLftRgt(out int lft, out int rgt);
             objCategory.GetChildren(lft, rgt, nestedList);
             return View(nestedList);
@@ -24,14 +24,14 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET   /category/Edit/ID
         [HttpGet]
-        public ActionResult RenameNode(int? id)
+        public ActionResult RenameCategory(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
 
-            //gets data of one node to display it to user
+            //gets data of one category to display it to user
             Category category = objCategory.GetCategoryData(id);
 
             if (category.ID==0 || category.Name=="ROOT")
@@ -46,7 +46,7 @@ namespace MVC_Adjacency_list_model.Controllers
         //POST   /category/edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RenameNode(Category category)
+        public ActionResult RenameCategory(Category category)
         {
             //if parameter object is not valid
             if (!ModelState.IsValid)
@@ -60,13 +60,13 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET   /category/NewNode/ID
         [HttpGet]
-        public ActionResult NewNode(int? id)
+        public ActionResult NewCategory(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
-            //gets data of one node to display it to user
+            //gets data of one category to display it to user
             Category categoryInDB = objCategory.GetCategoryData(id);
 
             //if object doesn't exist
@@ -79,10 +79,10 @@ namespace MVC_Adjacency_list_model.Controllers
         }
 
 
-        //POST   /category/NewNode
+        //POST   /category/NewCategory
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewNode(Category category)
+        public ActionResult NewCategory(Category category)
         {
             //if parameter object is not valid
             if (!ModelState.IsValid)
@@ -97,10 +97,10 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET /category/Move
         [HttpGet]
-        public ActionResult MoveNode()
+        public ActionResult MoveCategory()
         {
-            //gets data of one node to display it to user
-            MoveNodeViewModel moveNodeViewModel = new MoveNodeViewModel
+            //gets data of one category to display it to user
+            MoveCategoryViewModel moveNodeViewModel = new MoveCategoryViewModel
             {
                 allNameList = objCategory.GetAllCategories()
             };
@@ -112,16 +112,16 @@ namespace MVC_Adjacency_list_model.Controllers
         //POST   /category/move
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MoveNode(MoveNodeViewModel moveNodeViewModel)
+        public ActionResult MoveCategory(MoveCategoryViewModel viewModel)
         {
             //if parameter object is not valid
             if (!ModelState.IsValid)
             {
-                moveNodeViewModel.allNameList = objCategory.GetAllCategories();
-                return View("Move", moveNodeViewModel);
+                viewModel.allNameList = objCategory.GetAllCategories();
+                return View("MoveCategory", viewModel);
             }
-            objCategory.Move(moveNodeViewModel.nodeID, moveNodeViewModel.newParentID);
-            return RedirectToAction("Index", moveNodeViewModel);
+            objCategory.Move(viewModel.MovingNodeId, viewModel.NewParentID);
+            return RedirectToAction("Index", viewModel);
         }
     }
 }

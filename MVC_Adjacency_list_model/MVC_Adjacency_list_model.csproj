@@ -182,14 +182,14 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Models\MoveNodeNodeCheck.cs" />
-    <Compile Include="Models\MoveNodeNewParentCheck.cs" />
-    <Compile Include="ViewModels\CategoryCarrierViewModel.cs" />
+    <Compile Include="Models\MovingParentCheck.cs" />
+    <Compile Include="Models\MovingCategoryCheck.cs" />
+    <Compile Include="ViewModels\NestedCategoriesViewModel.cs" />
     <Compile Include="Migrations\202008021206098_AddedMaxLengthToCategory.cs" />
     <Compile Include="Migrations\202008021206098_AddedMaxLengthToCategory.Designer.cs">
       <DependentUpon>202008021206098_AddedMaxLengthToCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoryViewAccessLayer.cs" />
+    <Compile Include="Models\CategoryAccessLayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,9 +197,9 @@
     <Compile Include="Migrations\202007310858539_InitialMigration.Designer.cs">
       <DependentUpon>202007310858539_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202007310903022_addedCategoryTable.cs" />
-    <Compile Include="Migrations\202007310903022_addedCategoryTable.Designer.cs">
-      <DependentUpon>202007310903022_addedCategoryTable.cs</DependentUpon>
+    <Compile Include="Migrations\202007310903022_AddedCategoryTable.cs" />
+    <Compile Include="Migrations\202007310903022_AddedCategoryTable.Designer.cs">
+      <DependentUpon>202007310903022_AddedCategoryTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -208,7 +208,7 @@
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\MoveNodeViewModel.cs" />
+    <Compile Include="ViewModels\MoveCategoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -268,10 +268,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\RenameNode.cshtml" />
-    <Content Include="Views\Category\NewNode.cshtml" />
+    <Content Include="Views\Category\RenameCategory.cshtml" />
+    <Content Include="Views\Category\NewCategory.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
-    <Content Include="Views\Category\MoveNode.cshtml" />
+    <Content Include="Views\Category\MoveCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,8 +293,8 @@
     <EmbeddedResource Include="Migrations\202007310858539_InitialMigration.resx">
       <DependentUpon>202007310858539_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007310903022_addedCategoryTable.resx">
-      <DependentUpon>202007310903022_addedCategoryTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007310903022_AddedCategoryTable.resx">
+      <DependentUpon>202007310903022_AddedCategoryTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008021206098_AddedMaxLengthToCategory.resx">
       <DependentUpon>202008021206098_AddedMaxLengthToCategory.cs</DependentUpon>

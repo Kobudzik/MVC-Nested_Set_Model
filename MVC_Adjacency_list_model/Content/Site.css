@@ -34,18 +34,13 @@ textarea {
 }
 
 .small-font {
-    font-size: xx-small;
+    font-size: x-small;
 }
 
 .red {
     color: red;
     font-size:large;
 }
-
-.leaf {
-font-size:small;
-}
-
 
 .tooltip {
     position: relative;
@@ -73,11 +68,10 @@ font-size:small;
 }
 
 .node{
-    list-style: none
+    list-style: square;
 }
-.node:before {
-    content: "▼";
-}
+
+
 li{
-    list-style:square;
+    list-style: circle;
 }

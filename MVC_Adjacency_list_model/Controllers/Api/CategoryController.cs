@@ -6,14 +6,14 @@ namespace MVC_Adjacency_list_model.Controllers.Api
 {
     public class CategoryController : ApiController
     {
-        CategoryViewAccessLayer objCategory = new CategoryViewAccessLayer();
+        CategoryAccessLayer objCategory = new CategoryAccessLayer();
 
         [HttpDelete]
-        public void DeleteNode(int id)
+        public void DeleteCategory(int id)
         {
-            Category nodeInDb = objCategory.GetCategoryData(id);
+            Category categoryInDb = objCategory.GetCategoryData(id);
 
-            if (nodeInDb == null)
+            if (categoryInDb == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }

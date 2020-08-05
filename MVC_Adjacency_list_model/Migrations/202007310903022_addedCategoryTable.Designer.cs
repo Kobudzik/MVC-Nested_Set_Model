@@ -7,9 +7,9 @@ namespace MVC_Adjacency_list_model.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedCategoryTable : IMigrationMetadata
+    public sealed partial class AddedCategoryTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedCategoryTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedCategoryTable));
         
         string IMigrationMetadata.Id
         {
