@@ -21,7 +21,10 @@
                 {
                     typeClass = "node";
                 }
-                <li class="@typeClass" data-my-content="@item.Name" data-my-level="@depth">@item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList, depth)</li>
+                <li class="@typeClass" order="random" data-my-content="@item.Name" data-my-level="@depth">
+                    @item.Name@DisplayMenu(item)
+                    @TreeView(item.deeperList, depth)
+                </li>
             }
         @:</ul>
     }
@@ -33,7 +36,7 @@
     <div style="display: inline-block;" class="display-menu">
         @if (item.deeperList.Count > 1)
         {
-            <a class="small-font newClick" title="sort">[sort]</a>
+            <a class="small-font sortButton" title="sort">[sort]</a>
         }
     </div>
 }
@@ -42,7 +45,9 @@
 <hr />
 
 <div id="menu">
-    <a title="Toggle" id="toggleButton">[Toggle all]</a>
+    <a title="Toggle" id="toggleAllButton">[Toggle all]</a>
+    <a title="Sort All" id="sortAllbutton">[Sort all]</a>
+
 </div>
 
 <div id="listDiv" style="font-size:large">

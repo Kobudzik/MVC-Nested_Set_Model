@@ -2,7 +2,7 @@
     AddListClasses();
 });
 
-$("#toggleButton").click(function () {
+$("#toggleAllButton").click(function () {
     toggleAllCategories();
 });
 
@@ -49,31 +49,62 @@ function AddListClasses() {
 //$(this).parents().eq(1).find("li[data-my-level='2']").addClass("red");
 
 
-$('.newClick').click(function () {  // inserted callback param EVENT
 
-    //wybranie rodziców 2 poziomy wyżej
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('.sortButton, #sortAllButton').click(function () {
     var parents = $(this).parents().eq(1);
-
-    //current depth of clicked object
+    var parent = parents.first("li");
     var parentDepth = parseInt(parents.first("li").attr("data-my-level"));
-
-    //depth of clicked object's child
     var intChildDepth = parseInt(parentDepth) + 1;
+    var lowerChildren = parents.find("li[data-my-level=" + intChildDepth + "]");
 
-    //only lower LI children
-    var lowerLiChildren = parents.find("li[data-my-level=" + intChildDepth + "]");
+    lowerChildren.sort(compareAlphabetically).each(function () {
+        this.parentNode.appendChild(this);
+    });
 
     function uCase(param) {
         return $(param).text().toUpperCase();
     }
 
-    function compareAlphabetically(a, b) {
+
+    function compareAlphabetically(a,b) {
         var firstString = uCase($(a).first());
         var secondString = uCase($(b).first());
-        return (firstString > secondString) ? 1 : -1; //ORDER
+
+        if (parent.attr("order") == "random" || parent.attr("order") == "desc") {
+            return (firstString > secondString) ? 1 : -1; //ASC ORDER
+        }
+
+        else {
+            return (firstString > secondString) ? -1 : 1; //DESC ORDER
+        }
+
+    }    
+
+    //przełączanie na desc
+    if (parent.attr("order") == "asc") {
+        parent.attr("order", "desc");
+        return;
     }
 
-    lowerLiChildren.sort(compareAlphabetically).each(function () {
-        this.parentNode.appendChild(this);
-    });
+    //przełączanie na asc
+    if (parent.attr("order") == "random" || parent.attr("order") == "desc")
+        parent.attr("order", "asc");
 })
