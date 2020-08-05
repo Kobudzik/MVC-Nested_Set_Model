@@ -12,6 +12,7 @@ namespace MVC_Adjacency_list_model.ViewModels
 
         [Required]
         [MaxLength(30)]
+        [RegularExpression(@"^[a-zA-Z0-9]+$+\d", ErrorMessage = "Special character and numbers should not be entered.")]
         public string Name { get; set; }
 
         [Required]

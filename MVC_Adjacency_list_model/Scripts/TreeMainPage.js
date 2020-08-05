@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    AddListClasses();
+    addListClasses();
 });
 
 $("#toggleAllButton").click(function () {
@@ -38,14 +38,13 @@ function toggleAllCategories() {
         $('.subLink').show("fast");
 };
 
-function AddListClasses() {
+function addListClasses() {
 
     $('li:has(ul)').addClass('link');
     $('ul ul').addClass('subLink');
 };
 
 $('.sortButton, #sortAllButton').click(function () {
-
     var parents = $(this).parents().eq(1);
     var parent = parents.first("li");
     var parentDepth = parseInt(parent.attr("data-my-level"));
@@ -70,14 +69,13 @@ $('.sortButton, #sortAllButton').click(function () {
         var firstString = uCase($(a).first());
         var secondString = uCase($(b).first());
 
-        if (parent.attr("order") == "random" || parent.attr("order") == "desc") {
+        if (parent.attr("order") == "database" || parent.attr("order") == "desc") {
             return (firstString > secondString) ? 1 : -1; //ASC ORDER
         }
 
         else {
             return (firstString > secondString) ? -1 : 1; //DESC ORDER
         }
-
     }    
 
     //przełączanie na desc
@@ -87,6 +85,6 @@ $('.sortButton, #sortAllButton').click(function () {
     }
 
     //przełączanie na asc
-    if (parent.attr("order") == "random" || parent.attr("order") == "desc")
+    if (parent.attr("order") == "database" || parent.attr("order") == "desc")
         parent.attr("order", "asc");
 })

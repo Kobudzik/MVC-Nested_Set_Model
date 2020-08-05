@@ -21,7 +21,7 @@
                 {
                     typeClass = "node";
                 }
-                <li class="@typeClass" order="random" data-my-content="@item.Name" data-my-level="@depth">
+                <li class="@typeClass" order="database" data-my-content="@item.Name" data-my-level="@depth">
                     @item.Name@DisplayMenu(item)
                     @TreeView(item.deeperList, depth)
                 </li>

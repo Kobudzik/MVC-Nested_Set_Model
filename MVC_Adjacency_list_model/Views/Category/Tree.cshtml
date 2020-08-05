@@ -21,7 +21,10 @@
                 {
                     typeClass = "node";
                 }
-                <li class="@typeClass" data-my-content="@item.Name" data-my-level="@depth">@item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList, depth)</li>
+                <li class="@typeClass" order="database" data-my-content="@item.Name" data-my-level="@depth">
+                    @item.Name@DisplayMenu(item)
+                    @TreeView(item.deeperList, depth)
+                </li>
             }
         @:</ul>
     }
@@ -43,18 +46,23 @@
         @*//SORT BUTTON*@
         @if (item.deeperList.Count > 1)
         {
-            <a class="small-font newClick" title="sort">[sort]</a>
+            <a class="small-font sortButton" title="sort">[sort]</a>
         }
     </div>
 }
 
+
+
 <h2>Here is your DB structure as a tree!</h2>
 <hr />
-<a href="/Category/MoveCategory" class="btn btn-primary" style="padding: 5px 5px; font-size:x-small">Move category</a>
 
-@Html.ActionLink("➕  ", "NewCategory", "Category", new { id = 1 }, new { title = "New Root Category" })
-<a title="Toggle" id="toggleButton">[Toggle all]</a>
-@*USE HELPER TO DISPLAY LIST*@
+<div id="menu" order="random">
+    <a href="/Category/MoveCategory" class="btn btn-primary" style="padding: 5px 5px; font-size:x-small">Move category</a>
+    @Html.ActionLink("➕  ", "NewCategory", "Category", new { id = 1 }, new { title = "New Root Category" })
+    <a title="Toggle" id="toggleAllButton">[Toggle all]</a>
+    <a title="Sort All" id="sortAllButton">[Sort all]</a>
+</div>
+
 <div id="listDiv" style="font-size:large">
     @TreeView(Model, 0)
 </div>
