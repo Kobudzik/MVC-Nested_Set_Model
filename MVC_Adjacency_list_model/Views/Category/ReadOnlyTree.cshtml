@@ -41,17 +41,30 @@
     </div>
 }
 
-<h2>Here is your DB structure as a tree!</h2>
-<hr />
+@if (Model.Count() > 0)
+{
+    <h2>Here is your data base structure as a tree!</h2>
+    <hr />
+}
+else
+{
+    <h2>Your data base is empty!</h2>
+    <h3>You need admin privilages to add elements.</h3>
+}
+
+
 
 <div id="menu" order="random">
-    <a title="Toggle" id="toggleAllButton">
-       <span class="glyphicon glyphicon-eye-open"></span>
-    </a>
+    @if (Model.Count() > 1)
+    {
+        <a id="toggleAllButton">
+            <span title="Toggle" class="glyphicon glyphicon-eye-open"></span>
+        </a>
 
-    <a title="Sort All" id="sortAllButton">
-        <span class="glyphicon glyphicon-sort"></span>
-    </a>
+        <a id="sortAllButton">
+            <span title="sort" class="glyphicon glyphicon-sort"></span>
+        </a>
+    }
 </div>
 
 <div id="listDiv">

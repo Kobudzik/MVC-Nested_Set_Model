@@ -12,7 +12,7 @@ namespace MVC_Adjacency_list_model.ViewModels
 
         [Required]
         [MaxLength(30)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only letters allowed.")]
+        [RegularExpression(@"^[a-żA-Ż]+$", ErrorMessage = "Only letters allowed.")]
         public string Name { get; set; }
 
         [Required]

@@ -7,44 +7,26 @@
 
 
         <h3>Witaj na stronie wstępnej!</h3>
-        <p>Projekt został wykonany z użyciem technologi MVC, działa on bazie MSSQL. Lista przechowywana jest na serwerze w oparciu o model zbiorów zagnieżdżonych, co ułatwia operacje na węzłach.</p>
-        <p>W pracy tej został użyty plugin BootboxJS (do wyświetlania komunikatów). Należy zaznaczyć jeszcze, że w Migrations.Configuration odkomentowana jest metoda Seed, dzieki której ,,roboczo" wypełniana jest tabela przykładowymi danymi.</p>
+        <p>
+            Projekt został wykonany z użyciem technologi MVC, działa on bazie MSSQL. Lista przechowywana jest na serwerze w oparciu o model zbiorów zagnieżdżonych, co upraszcza operacje na węzłach (subiektywnie- w porównaniu do innych podejść).
+            W pracy tej został użyty plugin BootboxJS (do wyświetlania komunikatów). Należy mieć na uwadze, że aby mieć możliwość edycji listy (dodawanie, usuwanie, przemieszczanie węzłów) należy być zalogowanym jako administator.
+        </p>
 
 
         <br /><h4>Opis oznaczeń:</h4>
+
         <p>&#9632; -  węzły,</p>
         <p>&#9675; -  liście,</p>
-        <p><span class="glyphicon glyphicon-sort"></span> - przycisk używany do sortowania listy (widoczny tylko, jeśli element nie jest liściem i ma przynajmniej dwoje dzieci),</p>
-        <p><span class="glyphicon glyphicon-eye-open"></span> - przycisk do rozwijania/ chowania elementów (widoczny tylko, jeśli element posida dzieci),</p>
-
-        <p><span title="Move Category" class="glyphicon glyphicon-pushpin"></span>- przycisk do przenoszenia elementów (widoczny tylko, jeśli istnieją przynajmniej dwa elementy)</p>
-        <p><span title="New Root Category" class="glyphicon glyphicon-plus-sign"></span> - przycisk do dodawania nowego elementu,</p>
-        <p><span title="Delete category" class="glyphicon glyphicon-trash"></span> - przycisk do usuwania elementu ((widoczny tylko, istnieje przynajmniej jeden element)</p>
-        <p>Dodatkowo kliknięcię na nazwę węzła chowa go (wraz z jego podelementami)</p>
-
-
-
-
-
-        
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
+        <p><span class="glyphicon glyphicon-sort"></span> - sortowanie listy (widoczny tylko, jeśli element ma przynajmniej dwoje dzieci),</p>
+        <p><span class="glyphicon glyphicon-eye-open"></span> - rozwijanie/ chowanie podelementów (widoczny tylko, jeśli element posida dzieci),</p>
+        <p><span title="Move Category" class="glyphicon glyphicon-pushpin"></span>- przenoszenie elementów (widoczny tylko, jeśli istnieją przynajmniej dwa elementy)</p>
+        <p><span title="New Root Category" class="glyphicon glyphicon-plus-sign"></span> - dodawanie nowego elementu,</p>
+        <p><span title="Delete category" class="glyphicon glyphicon-trash"></span> - usuwanie elementu ((widoczny tylko, istnieje przynajmniej jeden element),</p>
+        <p>Dodatkowo kliknięcie na nazwę węzła chowa go (wraz z jego podelementami), a najechanie na przycisk pozwala zobaczyć jego opis.</p>
 
 
         <br />
-        <h5>Dane do logowania:</h5>
+        <h4>Dane do logowania jako administrator:</h4>
         <p>
             login: admin@net.com<br />
             hasło: !Admin123

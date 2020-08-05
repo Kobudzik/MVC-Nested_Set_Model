@@ -34,29 +34,38 @@
 
 @helper DetailedMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
 {
-<div style="display: inline-block;" class="detailed-menu">
-    <a href=@Url.Action("NewCategory", "Category", new { id = item.ID })>
-        <span title="Add new category" class="glyphicon glyphicon-plus-sign"></span>
-    </a>
-
-    <a href=@Url.Action("RenameCategory", "Category", new { id = item.ID })>
-        <span title="Rename category" class="glyphicon glyphicon-tag"></span>
-    </a>
-
-    <a href="javascript:deleteCategory(@item.ID);">
-        <span title="Delete category" class="glyphicon glyphicon-trash"></span>
-    </a>
-
-    @if (item.deeperList.Count > 1)
-    {
-        <a class="small-font sortButton" title="sort">
-            <span class="glyphicon glyphicon-sort"></span>
+    <div style="display: inline-block;" class="detailed-menu">
+        <a href=@Url.Action("NewCategory", "Category", new { id = item.ID })>
+            <span title="Add new category" class="glyphicon glyphicon-plus-sign"></span>
         </a>
-    }
-</div>
+
+        <a href=@Url.Action("RenameCategory", "Category", new { id = item.ID })>
+            <span title="Rename category" class="glyphicon glyphicon-tag"></span>
+        </a>
+
+        <a href="javascript:deleteCategory(@item.ID);">
+            <span title="Delete category" class="glyphicon glyphicon-trash"></span>
+        </a>
+
+        @if (item.deeperList.Count > 1)
+        {
+            <a class="small-font sortButton" title="sort">
+                <span class="glyphicon glyphicon-sort"></span>
+            </a>
+        }
+    </div>
 }
 
-<h2>Here is your DB structure as a tree!</h2>
+@if (Model.Count() > 0)
+{
+    <h2>Here is your data base structure as a tree!</h2>
+    <hr />
+}
+else
+{
+    <h2>Your data base is empty!</h2>
+    <h3>Why won't you add some elements?</h3>
+}
 <hr />
 
 <div id="menu" order="random">
@@ -75,7 +84,7 @@
         </a>
 
         <a id="sortAllButton">
-            <span  title="sort" class="glyphicon glyphicon-sort"></span>
+            <span title="sort" class="glyphicon glyphicon-sort"></span>
         </a>
     }
 
