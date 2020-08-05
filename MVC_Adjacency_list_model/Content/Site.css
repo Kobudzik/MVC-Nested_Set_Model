@@ -37,36 +37,11 @@ textarea {
     font-size: small;
 }
 
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: -5px;
-    left: 105%;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-}
-
 .node{
     list-style: square;
 }
 
-ul {
+ul{
     color: black;
 }
 li{
@@ -80,7 +55,21 @@ li{
     margin-left:5px;
 }
 
-#menu
+#menu, #listDiv
 {
-    font-size:large;
+    font-size:x-large;
+}
+span {
+    color: #B00020;
+}
+
+
+/*other pages*/
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+/*Other pages (on hover)*/
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+color: black;
 }
