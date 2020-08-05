@@ -31,10 +31,9 @@
 @helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
 {
     <div style="display: inline-block;" class="display-menu">
-        @*//SORT BUTTON*@
         @if (item.deeperList.Count > 1)
         {
-            <a class="small-font" title="sort" id="newClick">[sort]</a>
+            <a class="small-font newClick" title="sort">[sort]</a>
         }
     </div>
 }
@@ -56,22 +55,4 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/TreeScripts")
-    <script>
-        $(document).ready(function () {
-            AddListClasses();
-        });
-
-        $("#toggleButton").click(function () {
-            toggleAllCategories();
-        });
-
-        $('ul li').click(function (e) {
-            e.stopPropagation();
-            $(this).children('.subLink').toggle('slow');
-        });
-
-        $("#listDiv a").click(function (e) {
-            e.stopPropagation();
-        });
-    </script>
 }

@@ -37,11 +37,6 @@ textarea {
     font-size: x-small;
 }
 
-.red {
-    color: red;
-    font-size:large;
-}
-
 .tooltip {
     position: relative;
     display: inline-block;
@@ -71,7 +66,21 @@ textarea {
     list-style: square;
 }
 
-
+ul {
+    color: black;
+}
 li{
     list-style: circle;
+    color:black;
+}
+
+
+.green{
+    color: green;
+    font-size: large;
+}
+
+.red {
+    color: red;
+    font-size: large;
 }

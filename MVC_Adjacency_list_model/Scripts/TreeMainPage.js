@@ -1,4 +1,23 @@
-﻿function deleteCategory(ID) {
+﻿$(document).ready(function () {
+    AddListClasses();
+});
+
+$("#toggleButton").click(function () {
+    toggleAllCategories();
+});
+
+$('ul li').click(function (e) {
+    e.stopPropagation();
+    $(this).children('.subLink').toggle('slow');
+});
+
+$("#listDiv a").click(function (e) {
+    e.stopPropagation();
+});
+
+
+//FUNCTIONS
+function deleteCategory(ID) {
     bootbox.confirm("Are you sure you want to delete this node and its children?", function (bootboxResult) {
         if (bootboxResult) {
             $.ajax({
@@ -26,21 +45,27 @@ function AddListClasses() {
 };
 
 
-    //<a> (display menu) toggling fix
+
+//$(this).parents().eq(1).find("li[data-my-level='2']").addClass("red");
 
 
+$('.newClick').click(function () {  // inserted callback param EVENT
 
-        //$('#newClick').click(function (toggle) {  // inserted callback param EVENT
-        //    toggle.stopPropagation();
-        //    $(this).first(".subLink").addClass("red");
-        //    var inside = $("li:first-child");
+    //wybranie rodziców 2 poziomy wyżej
+    var parents = $(this).parents().eq(1);
 
-        //    inside.each(function () {
-        //        alert($(this).attr("data-my-content"));
-        //    });
+    //current depth klikniętego obiektu
+    var parentDepth = parseInt(parents.first("li").attr("data-my-level"));
 
-        //});
+    var intChildDepth = parseInt(parentDepth);
+    intChildDepth += 1;
+    alert(intChildDepth);
+
+    //only lower LI children
+    var lowerLiChild = parents.find("li[data-my-level=" + intChildDepth+"]").each(
+        function () {
+                $(this).addClass("red");
+        });
 
 
-
-
+});
