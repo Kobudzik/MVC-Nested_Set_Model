@@ -17,14 +17,23 @@ namespace MVC_Adjacency_list_model.Models
         public string Name { get; set; }
 
         [Required]
-        public int lft { get; set; }
+        public int Lft { get; set; }
 
         [Required]
-        public int rgt { get; set; }
+        public int Rgt { get; set; }
 
         public override string ToString()
         {
-            return ("ID= " + ID + ", Name= " +Name + ", lft= "+lft + ", rgt= "+ rgt);
+            return ("ID= " + ID + ", Name= " +Name + ", lft= "+Lft + ", rgt= "+ Rgt);
         }
+
+        public List<Category> deeperList;
+
+
+        public Category()
+        {
+            deeperList = new List<Category>();
+        }
+
     }
 }

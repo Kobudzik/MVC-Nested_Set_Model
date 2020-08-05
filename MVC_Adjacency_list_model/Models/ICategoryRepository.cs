@@ -8,9 +8,9 @@ namespace MVC_Adjacency_list_model.Models
 {
     public interface ICategoryRepository
     {
-        IEnumerable<Category> GetAll();
+        List<Category> GetAll();
         void GetRootCords(out int rootLft, out int rootRgt);
-        IEnumerable<NestedCategoriesViewModel> GetChildren(int lft, int rgt, List<NestedCategoriesViewModel> list);
+        IEnumerable<Category> GetChildren(int lft, int rgt, List<Category> list);
         bool CheckChildren(int lft, int rgt);
         Category GetSingle(int? id);
         void Rename(Category category);

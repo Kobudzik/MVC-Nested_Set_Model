@@ -194,7 +194,6 @@
     <Compile Include="Models\MovingParentCheck.cs" />
     <Compile Include="Models\MovingCategoryCheck.cs" />
     <Compile Include="Models\RoleName.cs" />
-    <Compile Include="ViewModels\NestedCategoriesViewModel.cs" />
     <Compile Include="Migrations\202008021206098_AddedMaxLengthToCategory.cs" />
     <Compile Include="Migrations\202008021206098_AddedMaxLengthToCategory.Designer.cs">
       <DependentUpon>202008021206098_AddedMaxLengthToCategory.cs</DependentUpon>

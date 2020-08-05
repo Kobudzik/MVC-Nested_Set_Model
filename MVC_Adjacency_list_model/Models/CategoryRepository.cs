@@ -16,29 +16,26 @@ namespace MVC_Adjacency_list_model.Models
         /// To View all Categories details    NOT USED
         /// </summary>
         /// <returns>List of Category objects</returns>
-        public IEnumerable<Category> GetAll()
+        public List<Category> GetAll()
         {
-            List<Category> listCategory = new List<Category>();
-
+            List<Category> listCategoryAll = new List<Category>();
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("spGetAllCategories", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
-
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())  //if there is more rows
                 {
-                    Category category = new Category();
-                    category.ID = Convert.ToInt32(rdr["ID"]);
-                    category.Name = rdr["Name"].ToString();
-                    category.lft = Convert.ToInt32(rdr["lft"]);
-                    category.rgt = Convert.ToInt32(rdr["rgt"]);
-
-                    listCategory.Add(category);
+                    Category newCategory = new Category();
+                    newCategory.ID = Convert.ToInt32(rdr["ID"]);
+                    newCategory.Name = rdr["Name"].ToString();
+                    newCategory.Lft = Convert.ToInt32(rdr["lft"]);
+                    newCategory.Rgt = Convert.ToInt32(rdr["rgt"]);
+                    listCategoryAll.Add(newCategory);
                 }
             }
-            return listCategory;
+            return listCategoryAll;
         }
 
         /// <summary>
@@ -75,7 +72,7 @@ namespace MVC_Adjacency_list_model.Models
         /// <param name="rgt"></param>
         /// <param name="list"></param>
         /// <returns>Returns list of CategoryCarrierViewModel (category with list field) </returns>
-        public IEnumerable<NestedCategoriesViewModel> GetChildren(int lft, int rgt, List<NestedCategoriesViewModel> list)
+        public IEnumerable<Category> GetChildren(int lft, int rgt, List<Category> list)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -94,7 +91,7 @@ namespace MVC_Adjacency_list_model.Models
                 while (rdr.Read())  
                 {
                     //GETS ONE CHILD (CARRIER)  OF SPECIFIED PARAMETERS
-                    NestedCategoriesViewModel categoryCarrier = new NestedCategoriesViewModel
+                    Category categoryCarrier = new Category
                     {
                         ID = Convert.ToInt32(rdr["ID"]),
                         Name = rdr["Name"].ToString(),
@@ -113,7 +110,7 @@ namespace MVC_Adjacency_list_model.Models
                     //IF THERE ARE CHILDREN DEEPER
                     if (CheckChildren(lft, rgt))
                     {
-                        List<NestedCategoriesViewModel> newDeeperList = new List<NestedCategoriesViewModel>();
+                        List<Category> newDeeperList = new List<Category>();
                         GetChildren(lft, rgt, newDeeperList);
                         list[rowInsideWhile].deeperList = newDeeperList;
                     }
@@ -166,8 +163,8 @@ namespace MVC_Adjacency_list_model.Models
                 {
                     category.ID = Convert.ToInt32(rdr["ID"]);
                     category.Name = rdr["Name"].ToString();
-                    category.lft = Convert.ToInt32(rdr["lft"]);
-                    category.rgt = Convert.ToInt32(rdr["rgt"]);
+                    category.Lft = Convert.ToInt32(rdr["lft"]);
+                    category.Rgt = Convert.ToInt32(rdr["rgt"]);
                 }
             }
             return category;
@@ -251,11 +248,11 @@ namespace MVC_Adjacency_list_model.Models
 
                 //moving category
                 cmd.Parameters.AddWithValue("@node_id", movingCategory.ID);
-                cmd.Parameters.AddWithValue("@node_pos_left", movingCategory.lft);
-                cmd.Parameters.AddWithValue("@node_pos_right", movingCategory.rgt);
+                cmd.Parameters.AddWithValue("@node_pos_left", movingCategory.Lft);
+                cmd.Parameters.AddWithValue("@node_pos_right", movingCategory.Rgt);
                 //new parent
                 cmd.Parameters.AddWithValue("@new_parent_ID", newParent.ID);
-                cmd.Parameters.AddWithValue("@new_parent_pos_right", newParent.rgt);
+                cmd.Parameters.AddWithValue("@new_parent_pos_right", newParent.Rgt);
                 
                 cmd.Parameters.AddWithValue("@node_size", 0);
 

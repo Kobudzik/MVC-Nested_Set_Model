@@ -1,9 +1,9 @@
-﻿@model List<MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel>
+﻿@model List<MVC_Adjacency_list_model.Models.Category>
 @{
     ViewBag.Title = "Tree";
 }
 
-@helper TreeView(List<MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel> categoryTree, int depth)
+@helper TreeView(List<MVC_Adjacency_list_model.Models.Category> categoryTree, int depth)
 {
     string typeClass = null;
     if (categoryTree.Count() > 0)
@@ -31,7 +31,7 @@
 
 }
 
-@helper DetailedMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
+@helper DetailedMenu(MVC_Adjacency_list_model.Models.Category item)
 {
     <div style="display: inline-block;" class="display-menu">
         @if (item.deeperList.Count > 1)

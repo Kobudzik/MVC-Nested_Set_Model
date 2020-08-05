@@ -1,9 +1,9 @@
-﻿@model List<MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel>
+﻿@model List<MVC_Adjacency_list_model.Models.Category>
 @{
     ViewBag.Title = "Tree";
 }
 
-@helper TreeView(List<MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel> categoryTree, int depth)
+@helper TreeView(List<MVC_Adjacency_list_model.Models.Category> categoryTree, int depth)
 {
     string typeClass = null;
     if (categoryTree.Count() > 0)
@@ -13,7 +13,7 @@
             foreach (var item in categoryTree)
             {
                 //jeśli jest liściem
-                if (item.deeperList.Count == 0)
+                if (item.deeperList.Count() == 0)
                 {
                     typeClass = "leaf";
                 }
@@ -32,7 +32,7 @@
 
 }
 
-@helper DetailedMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
+@helper DetailedMenu(MVC_Adjacency_list_model.Models.Category item)
 {
     <div style="display: inline-block;" class="detailed-menu">
         <a href=@Url.Action("NewCategory", "Category", new { id = item.ID })>
@@ -88,7 +88,7 @@ else
         </a>
     }
 
-    @if (Model.Count() == 1)
+    @if (Model.Count() > 0)
     {
         <a href="javascript:deleteAll();">
             <span title="Delete all" class="glyphicon glyphicon-trash"></span>

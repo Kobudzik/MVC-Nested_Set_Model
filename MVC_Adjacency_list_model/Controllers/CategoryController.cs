@@ -15,7 +15,7 @@ namespace MVC_Adjacency_list_model.Controllers
         //GET  /category/index
         public ActionResult Index()
         {            
-            List<NestedCategoriesViewModel> nestedList = new List<NestedCategoriesViewModel>();
+            List<Category> nestedList = new List<Category>();
             objCategory.GetRootCords(out int lft, out int rgt);
             objCategory.GetChildren(lft, rgt, nestedList);
 
