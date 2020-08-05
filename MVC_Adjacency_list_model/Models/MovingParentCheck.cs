@@ -11,12 +11,12 @@ namespace MVC_Adjacency_list_model.Models
         {
             var myModel = (MoveCategoryViewModel)validationContext.ObjectInstance;
 
-            if (myModel.NewParentID == myModel.MovingNodeId)
+            if (myModel.NewParentID == myModel.MovingNodeID)
             {
                 return new ValidationResult("You have to select diffrent nodes!");
             }
 
-            if (myModel.MovingNodeId == 1)
+            if (myModel.MovingNodeID == 1)
             {
                 return new ValidationResult("You can't move root!");
             }

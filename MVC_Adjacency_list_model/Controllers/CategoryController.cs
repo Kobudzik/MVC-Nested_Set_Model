@@ -111,12 +111,12 @@ namespace MVC_Adjacency_list_model.Controllers
         public ActionResult MoveCategory()
         {
             //gets data of one category to display it to user
-            MoveCategoryViewModel moveNodeViewModel = new MoveCategoryViewModel
+            MoveCategoryViewModel viewModel = new MoveCategoryViewModel
             {
-                allNameList = objCategory.GetAll()
+                allCategoriesList = objCategory.GetAll()
             };
 
-            return View(moveNodeViewModel);
+            return View(viewModel);
         }
 
 
@@ -129,10 +129,11 @@ namespace MVC_Adjacency_list_model.Controllers
             //if parameter object is not valid
             if (!ModelState.IsValid)
             {
-                viewModel.allNameList = objCategory.GetAll();
+                viewModel.allCategoriesList = objCategory.GetAll();
                 return View("MoveCategory", viewModel);
             }
-            objCategory.Move(viewModel.MovingNodeId, viewModel.NewParentID);
+
+            objCategory.Move(viewModel.MovingNodeID, viewModel.NewParentID);
             return RedirectToAction("Index", viewModel);
         }
     }

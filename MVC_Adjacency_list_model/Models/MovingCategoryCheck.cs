@@ -14,7 +14,7 @@ namespace MVC_Adjacency_list_model.Models
         {
             var myModel = (MoveCategoryViewModel)validationContext.ObjectInstance;
 
-            if (myModel.NewParentID == myModel.MovingNodeId)
+            if (myModel.NewParentID == myModel.MovingNodeID)
             {
                 return new ValidationResult("You have to select diffrent nodes!");
             }

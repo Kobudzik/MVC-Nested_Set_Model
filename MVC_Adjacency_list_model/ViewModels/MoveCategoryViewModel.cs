@@ -11,12 +11,12 @@ namespace MVC_Adjacency_list_model.ViewModels
     {
         [Required]
         [MovingParentCheck]
-        public int? MovingNodeId { get; set; }
+        public int? MovingNodeID { get; set; }
 
         [Required]
         [MovingCategoryCheck]
         public int? NewParentID { get; set; }
 
-        public IEnumerable<Category> allNameList;
+        public IEnumerable<Category> allCategoriesList;
     }
 }
