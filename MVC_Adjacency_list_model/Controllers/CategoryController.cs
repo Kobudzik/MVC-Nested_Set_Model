@@ -9,14 +9,14 @@ namespace MVC_Adjacency_list_model.Controllers
     public class CategoryController : Controller
     {
 
-        private CategoryAccessLayer objCategory = new CategoryAccessLayer();
+        private CategoryRepository objCategory = new CategoryRepository();
         
         //GET  /category
         //GET  /category/index
         public ActionResult Index()
         {            
             List<NestedCategoriesViewModel> nestedList = new List<NestedCategoriesViewModel>();
-            objCategory.GetRootLftRgt(out int lft, out int rgt);
+            objCategory.GetRootCords(out int lft, out int rgt);
             objCategory.GetChildren(lft, rgt, nestedList);
 
             if (User.IsInRole("Administrator"))
@@ -30,7 +30,6 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET   /category/Edit/ID
         [HttpGet]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles =RoleName.Administrator)]
         public ActionResult RenameCategory(int? id)
         {
@@ -40,7 +39,7 @@ namespace MVC_Adjacency_list_model.Controllers
             }
 
             //gets data of one category to display it to user
-            Category category = objCategory.GetCategoryData(id);
+            Category category = objCategory.GetSingle(id);
 
             if (category.ID==0 || category.Name=="ROOT")
             {
@@ -69,7 +68,6 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET   /category/NewNode/ID
         [HttpGet]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = RoleName.Administrator)]
         public ActionResult NewCategory(int? id)
         {
@@ -78,7 +76,7 @@ namespace MVC_Adjacency_list_model.Controllers
                 return HttpNotFound();
             }
             //gets data of one category to display it to user
-            Category categoryInDB = objCategory.GetCategoryData(id);
+            Category categoryInDB = objCategory.GetSingle(id);
 
             //if object doesn't exist
             if (categoryInDB.ID != id)
@@ -109,14 +107,13 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET /category/Move
         [HttpGet]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = RoleName.Administrator)]
         public ActionResult MoveCategory()
         {
             //gets data of one category to display it to user
             MoveCategoryViewModel moveNodeViewModel = new MoveCategoryViewModel
             {
-                allNameList = objCategory.GetAllCategories()
+                allNameList = objCategory.GetAll()
             };
 
             return View(moveNodeViewModel);
@@ -132,7 +129,7 @@ namespace MVC_Adjacency_list_model.Controllers
             //if parameter object is not valid
             if (!ModelState.IsValid)
             {
-                viewModel.allNameList = objCategory.GetAllCategories();
+                viewModel.allNameList = objCategory.GetAll();
                 return View("MoveCategory", viewModel);
             }
             objCategory.Move(viewModel.MovingNodeId, viewModel.NewParentID);

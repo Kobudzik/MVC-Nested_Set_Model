@@ -6,14 +6,14 @@ namespace MVC_Adjacency_list_model.Controllers.Api
 {
     public class CategoryController : System.Web.Http.ApiController
     {
-        CategoryAccessLayer objCategory = new CategoryAccessLayer();
+        CategoryRepository objCategory = new CategoryRepository();
 
         [HttpDelete]
         [System.Web.Mvc.ValidateAntiForgeryToken]
         [Authorize(Roles = RoleName.Administrator)]
         public void DeleteCategory(int id)
         {
-            Category categoryInDb = objCategory.GetCategoryData(id);
+            Category categoryInDb = objCategory.GetSingle(id);
 
             if (categoryInDb == null)
             {
