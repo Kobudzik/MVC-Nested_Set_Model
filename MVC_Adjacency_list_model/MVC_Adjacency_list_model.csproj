@@ -182,8 +182,13 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Migrations\202008050655152_SeedUsers.cs" />
+    <Compile Include="Migrations\202008050655152_SeedUsers.Designer.cs">
+      <DependentUpon>202008050655152_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\MovingParentCheck.cs" />
     <Compile Include="Models\MovingCategoryCheck.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="ViewModels\NestedCategoriesViewModel.cs" />
     <Compile Include="Migrations\202008021206098_AddedMaxLengthToCategory.cs" />
     <Compile Include="Migrations\202008021206098_AddedMaxLengthToCategory.Designer.cs">
@@ -211,6 +216,7 @@
     <Compile Include="ViewModels\MoveCategoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -267,11 +273,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Tree.cshtml" />
     <Content Include="Views\Category\RenameCategory.cshtml" />
     <Content Include="Views\Category\NewCategory.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Category\MoveCategory.cshtml" />
+    <Content Include="Views\Category\ReadOnlyTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -298,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008021206098_AddedMaxLengthToCategory.resx">
       <DependentUpon>202008021206098_AddedMaxLengthToCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008050655152_SeedUsers.resx">
+      <DependentUpon>202008050655152_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

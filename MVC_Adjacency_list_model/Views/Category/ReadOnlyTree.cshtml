@@ -1,0 +1,77 @@
+﻿@model List<MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel>
+@{
+    ViewBag.Title = "Tree";
+}
+
+@helper TreeView(List<MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel> categoryTree, int depth)
+{
+    string typeClass = null;
+    if (categoryTree.Count() > 0)
+    {
+        depth++;
+        @:<ul>
+            foreach (var item in categoryTree)
+            {
+                //jeśli jest liściem
+                if (item.deeperList.Count == 0)
+                {
+                    typeClass = "leaf";
+                }
+                else
+                {
+                    typeClass = "node";
+                }
+                <li class="@typeClass" data-my-content="@item.Name" data-my-level="@depth">@item.Name@DisplayMenu(item)@*sprawdza dalej*@@TreeView(item.deeperList, depth)</li>
+            }
+        @:</ul>
+    }
+
+}
+
+@helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
+{
+    <div style="display: inline-block;" class="display-menu">
+        @*//SORT BUTTON*@
+        @if (item.deeperList.Count > 1)
+        {
+            <a class="small-font" id="newClick">sort</a>
+        }
+    </div>
+}
+
+<h2>Here is your DB structure as a tree!</h2>
+<hr />
+
+<div id="menu">
+    <a title="Toggle" id="toggleButton">[Toggle all]</a>
+</div>
+
+<div id="listDiv" style="font-size:large">
+    @TreeView(Model, 0)
+</div>
+
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/TreeScripts")
+    <script>
+        $(document).ready(function () {
+            AddListClasses();
+        });
+
+        $("#toggleButton").click(function () {
+            toggleAllCategories();
+        });
+
+        $('ul li').click(function (e) {
+            e.stopPropagation();
+            $(this).children('.subLink').toggle('slow');
+        });
+
+        $("#listDiv a").click(function (e) {
+            e.stopPropagation();
+        });
+    </script>
+}

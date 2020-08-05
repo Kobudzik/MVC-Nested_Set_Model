@@ -14,16 +14,24 @@ namespace MVC_Adjacency_list_model.Controllers
         //GET  /category
         //GET  /category/index
         public ActionResult Index()
-        {
+        {            
             List<NestedCategoriesViewModel> nestedList = new List<NestedCategoriesViewModel>();
             objCategory.GetRootLftRgt(out int lft, out int rgt);
             objCategory.GetChildren(lft, rgt, nestedList);
-            return View(nestedList);
+
+            if (User.IsInRole("Administrator"))
+            {
+                return View("Tree", nestedList);
+            }
+
+            return View("ReadOnlyTree", nestedList);
         }
         
 
         //GET   /category/Edit/ID
         [HttpGet]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles =RoleName.Administrator)]
         public ActionResult RenameCategory(int? id)
         {
             if (id == null)
@@ -46,6 +54,7 @@ namespace MVC_Adjacency_list_model.Controllers
         //POST   /category/edit
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.Administrator)]
         public ActionResult RenameCategory(Category category)
         {
             //if parameter object is not valid
@@ -60,6 +69,8 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET   /category/NewNode/ID
         [HttpGet]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.Administrator)]
         public ActionResult NewCategory(int? id)
         {
             if (id == null)
@@ -82,6 +93,7 @@ namespace MVC_Adjacency_list_model.Controllers
         //POST   /category/NewCategory
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.Administrator)]
         public ActionResult NewCategory(Category category)
         {
             //if parameter object is not valid
@@ -97,6 +109,8 @@ namespace MVC_Adjacency_list_model.Controllers
 
         //GET /category/Move
         [HttpGet]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.Administrator)]
         public ActionResult MoveCategory()
         {
             //gets data of one category to display it to user
@@ -112,6 +126,7 @@ namespace MVC_Adjacency_list_model.Controllers
         //POST   /category/move
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.Administrator)]
         public ActionResult MoveCategory(MoveCategoryViewModel viewModel)
         {
             //if parameter object is not valid
