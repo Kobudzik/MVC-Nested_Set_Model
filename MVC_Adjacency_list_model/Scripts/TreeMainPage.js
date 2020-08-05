@@ -44,36 +44,18 @@ function AddListClasses() {
     $('ul ul').addClass('subLink');
 };
 
-
-
-//$(this).parents().eq(1).find("li[data-my-level='2']").addClass("red");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $('.sortButton, #sortAllButton').click(function () {
+
     var parents = $(this).parents().eq(1);
     var parent = parents.first("li");
-    var parentDepth = parseInt(parents.first("li").attr("data-my-level"));
+    var parentDepth = parseInt(parent.attr("data-my-level"));
     var intChildDepth = parseInt(parentDepth) + 1;
     var lowerChildren = parents.find("li[data-my-level=" + intChildDepth + "]");
+
+    if ($(this).attr("id") == "sortAllButton") {
+        lowerChildren = $("#listDiv").find("li[data-my-level='1']");
+        parent = lowerChildren;
+    }
 
     lowerChildren.sort(compareAlphabetically).each(function () {
         this.parentNode.appendChild(this);
