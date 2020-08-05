@@ -78,3 +78,6 @@ font-size:small;
 .node:before {
     content: "▼";
 }
+li{
+    list-style:square;
+}
