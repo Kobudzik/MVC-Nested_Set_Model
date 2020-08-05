@@ -181,7 +181,7 @@ namespace MVC_Adjacency_list_model.Models
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("spRenameNode", con)
+                SqlCommand cmd = new SqlCommand("spRenameCategory", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -201,7 +201,7 @@ namespace MVC_Adjacency_list_model.Models
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("spInsertNodeInside", con)
+                SqlCommand cmd = new SqlCommand("spInsertCategoryInside", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -221,7 +221,7 @@ namespace MVC_Adjacency_list_model.Models
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("spDeleteNodeById", con);
+                SqlCommand cmd = new SqlCommand("spDeleteCategoryById", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ID", id);
                 cmd.Parameters.AddWithValue("@myLeft",0);
@@ -245,7 +245,7 @@ namespace MVC_Adjacency_list_model.Models
                 Category movingCategory = GetSingle(categoryID);
                 Category newParent = GetSingle(newParentID);
 
-                SqlCommand cmd = new SqlCommand("spMoveNode", con);
+                SqlCommand cmd = new SqlCommand("spMoveCategory", con);
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -259,6 +259,20 @@ namespace MVC_Adjacency_list_model.Models
                 
                 cmd.Parameters.AddWithValue("@node_size", 0);
 
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
+        /// Deletes every category (except root)
+        /// </summary>
+        public void DeleteAllCategories()
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spDeleteAllCategories", con);
+                cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 cmd.ExecuteNonQuery();
             }

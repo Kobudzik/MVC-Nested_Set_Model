@@ -35,51 +35,59 @@
 @helper DetailedMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
 {
 <div style="display: inline-block;" class="detailed-menu">
+    <a href=@Url.Action("NewCategory", "Category", new { id = item.ID })>
+        <span title="Add new category" class="glyphicon glyphicon-plus-sign"></span>
+    </a>
 
     <a href=@Url.Action("RenameCategory", "Category", new { id = item.ID })>
         <span title="Rename category" class="glyphicon glyphicon-tag"></span>
     </a>
 
-    <a title="Delete" href="javascript:deleteCategory(@item.ID);">
+    <a href="javascript:deleteCategory(@item.ID);">
         <span title="Delete category" class="glyphicon glyphicon-trash"></span>
     </a>
 
-
-    <a href=@Url.Action("NewCategory", "Category", new { id = item.ID })>
-        <span title="Add new category" class="glyphicon glyphicon-plus-sign"></span>
-    </a>
-
-
-
-    @*//SORT BUTTON*@
     @if (item.deeperList.Count > 1)
     {
-        <a class="small-font sortButton" title="sort"><span class="glyphicon glyphicon-sort"></span></a>
+        <a class="small-font sortButton" title="sort">
+            <span class="glyphicon glyphicon-sort"></span>
+        </a>
     }
 </div>
 }
-
-
 
 <h2>Here is your DB structure as a tree!</h2>
 <hr />
 
 <div id="menu" order="random">
-    <a href=@Url.Action("MoveCategory", "Category")>
-        <span title="Move Category" class="glyphicon glyphicon-pushpin"></span>
-    </a>    
-
     <a href="@Url.Action("NewCategory", "Category", new { id = 1 })">
-        <span title = "New Root Category" class="glyphicon glyphicon-plus-sign"></span>
+        <span title="New Root Category" class="glyphicon glyphicon-plus-sign"></span>
     </a>
 
-    <a title="Toggle" id="toggleAllButton">
-        <span class="glyphicon glyphicon-eye-open"></span>
-    </a>
+    @if (Model.Count() > 1)
+    {
+        <a id="toggleAllButton">
+            <span title="Toggle" class="glyphicon glyphicon-eye-open"></span>
+        </a>
 
-    <a title="Sort All" id="sortAllButton">
-        <span class="glyphicon glyphicon-sort"></span>
-    </a>
+        <a href=@Url.Action("MoveCategory", "Category")>
+            <span title="Move Category" class="glyphicon glyphicon-pushpin"></span>
+        </a>
+
+        <a id="sortAllButton">
+            <span  title="sort" class="glyphicon glyphicon-sort"></span>
+        </a>
+    }
+
+    @if (Model.Count() == 1)
+    {
+        <a href="javascript:deleteAll();">
+            <span title="Delete all" class="glyphicon glyphicon-trash"></span>
+        </a>
+    }
+
+
+
 </div>
 
 <div id="listDiv">

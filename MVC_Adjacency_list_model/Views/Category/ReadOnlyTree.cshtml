@@ -22,7 +22,7 @@
                     typeClass = "node";
                 }
                 <li class="@typeClass" order="database" data-my-content="@item.Name" data-my-level="@depth">
-                    @item.Name@DisplayMenu(item)
+                    @item.Name@DetailedMenu(item)
                     @TreeView(item.deeperList, depth)
                 </li>
             }
@@ -31,7 +31,7 @@
 
 }
 
-@helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
+@helper DetailedMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
 {
     <div style="display: inline-block;" class="display-menu">
         @if (item.deeperList.Count > 1)
@@ -45,8 +45,13 @@
 <hr />
 
 <div id="menu" order="random">
-    <a title="Toggle" id="toggleAllButton"><span class="glyphicon glyphicon-eye-open"></span></a>
-    <a title="Sort All" id="sortAllButton"><span class="glyphicon glyphicon-sort"></span></a>
+    <a title="Toggle" id="toggleAllButton">
+       <span class="glyphicon glyphicon-eye-open"></span>
+    </a>
+
+    <a title="Sort All" id="sortAllButton">
+        <span class="glyphicon glyphicon-sort"></span>
+    </a>
 </div>
 
 <div id="listDiv">
