@@ -34,7 +34,7 @@ textarea {
 }
 
 .small-font {
-    font-size: x-small;
+    font-size: small;
 }
 
 .tooltip {
@@ -74,6 +74,13 @@ li{
     color:black;
 }
 
-red{
-color:red;
+.detailed-menu
+{
+    font-size:small;
+    margin-left:5px;
+}
+
+#menu
+{
+    font-size:large;
 }

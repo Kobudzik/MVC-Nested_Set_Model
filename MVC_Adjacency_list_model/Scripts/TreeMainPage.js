@@ -15,6 +15,12 @@ $("#listDiv a").click(function (e) {
     e.stopPropagation();
 });
 
+$(".glyphicon-eye-open").click(function () {
+    $(this).toggleClass("glyphicon glyphicon-eye-open");
+    $(this).toggleClass("glyphicon glyphicon-eye-close");
+
+});
+
 
 //FUNCTIONS
 function deleteCategory(ID) {

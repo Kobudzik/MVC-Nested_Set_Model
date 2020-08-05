@@ -22,7 +22,8 @@
                     typeClass = "node";
                 }
                 <li class="@typeClass" order="database" data-my-content="@item.Name" data-my-level="@depth">
-                    @item.Name@DisplayMenu(item)
+                    @item.Name
+                    @DetailedMenu(item)
                     @TreeView(item.deeperList, depth)
                 </li>
             }
@@ -31,24 +32,31 @@
 
 }
 
-@helper DisplayMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
+@helper DetailedMenu(MVC_Adjacency_list_model.ViewModels.NestedCategoriesViewModel item)
 {
-    <div style="display: inline-block;" class="display-menu">
-        @*RENAME BUTTON*@
-        @Html.ActionLink("✏️  ", "RenameCategory", "Category", new { id = item.ID }, new { @class = "small-font", title = "Rename" })
+<div style="display: inline-block;" class="detailed-menu">
 
-        @*DELETE BUTTON*@
-        <a class="small-font" title="Delete" href="javascript:deleteCategory(@item.ID);">🗑️</a>
+    <a href=@Url.Action("RenameCategory", "Category", new { id = item.ID })>
+        <span title="Rename category" class="glyphicon glyphicon-tag"></span>
+    </a>
 
-        @*//NEW_NODE BUTTON*@
-        @Html.ActionLink("➕  ", "NewCategory", "Category", new { id = item.ID }, new { @class = "small-font", title = "Add new" })
+    <a title="Delete" href="javascript:deleteCategory(@item.ID);">
+        <span title="Delete category" class="glyphicon glyphicon-trash"></span>
+    </a>
 
-        @*//SORT BUTTON*@
-        @if (item.deeperList.Count > 1)
-        {
-            <a class="small-font sortButton" title="sort">[sort]</a>
-        }
-    </div>
+
+    <a href=@Url.Action("NewCategory", "Category", new { id = item.ID })>
+        <span title="Add new category" class="glyphicon glyphicon-plus-sign"></span>
+    </a>
+
+
+
+    @*//SORT BUTTON*@
+    @if (item.deeperList.Count > 1)
+    {
+        <a class="small-font sortButton" title="sort"><span class="glyphicon glyphicon-sort"></span></a>
+    }
+</div>
 }
 
 
@@ -57,10 +65,21 @@
 <hr />
 
 <div id="menu" order="random">
-    <a href="/Category/MoveCategory" class="btn btn-primary" style="padding: 5px 5px; font-size:x-small">Move category</a>
-    @Html.ActionLink("➕  ", "NewCategory", "Category", new { id = 1 }, new { title = "New Root Category" })
-    <a title="Toggle" id="toggleAllButton">[Toggle all]</a>
-    <a title="Sort All" id="sortAllButton">[Sort all]</a>
+    <a href=@Url.Action("MoveCategory", "Category")>
+        <span title="Move Category" class="glyphicon glyphicon-pushpin"></span>
+    </a>    
+
+    <a href="@Url.Action("NewCategory", "Category", new { id = 1 })">
+        <span title = "New Root Category" class="glyphicon glyphicon-plus-sign"></span>
+    </a>
+
+    <a title="Toggle" id="toggleAllButton">
+        <span class="glyphicon glyphicon-eye-open"></span>
+    </a>
+
+    <a title="Sort All" id="sortAllButton">
+        <span class="glyphicon glyphicon-sort"></span>
+    </a>
 </div>
 
 <div id="listDiv" style="font-size:large">
