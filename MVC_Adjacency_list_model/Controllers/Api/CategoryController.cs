@@ -6,12 +6,8 @@ namespace MVC_nested_set_model.Controllers.Api
 {
     public class CategoryController : System.Web.Http.ApiController
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly CategoryRepository _categoryRepository= new CategoryRepository();
 
-        public CategoryController(ICategoryRepository myRepo)
-        {
-            _categoryRepository = myRepo;
-        }
 
         [HttpDelete]
         [System.Web.Mvc.ValidateAntiForgeryToken]
