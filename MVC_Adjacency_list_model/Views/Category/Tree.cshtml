@@ -21,7 +21,7 @@
                 {
                     typeClass = "node";
                 }
-                <li class="@typeClass" order="database" data-my-content="@item.Name" data-my-level="@depth">
+                <li class="@typeClass" order="database" data-my-level="@depth">
                     @item.Name
                     @DetailedMenu(item)
                     @TreeView(item.deeperList, depth)
@@ -58,11 +58,10 @@
 @if (Model.Count() > 0)
 {
     <h2>Here is your data base structure as a tree!</h2>
-    <hr />
 }
 else
 {
-    <h2>Your data base is empty!</h2>
+    <h2>Your database is empty!</h2>
     <h3>Why won't you add some elements?</h3>
 }
 <hr />

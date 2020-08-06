@@ -36,14 +36,16 @@ textarea {
     list-style: square;
 }
 
-.detailed-menu
-{
+.leaf{
+    list-style: circle;
+}
+
+.detailed-menu{
     font-size:small;
     margin-left:5px;
 }
 
-#menu, #listDiv
-{
+#menu, #listDiv{
     font-size:x-large;
 }
 
@@ -51,18 +53,18 @@ span {
     color: #B00020;
 }
 
-a:hover {
+a:hover{
     text-decoration: none;
     cursor: pointer;
 }
 
 /*NAVBAR*/
 /*other pages*/
-.navbar-inverse .navbar-nav > li > a {
+.navbar-inverse .navbar-nav > li > a{
     color: white;
 }
 
 /*Other pages (on hover)*/
-.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover{
 color: black;
 }
