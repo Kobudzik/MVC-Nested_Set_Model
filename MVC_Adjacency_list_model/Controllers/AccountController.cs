@@ -6,9 +6,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MVC_Adjacency_list_model.Models;
+using MVC_nested_set_model.Models;
 
-namespace MVC_Adjacency_list_model.Controllers
+namespace MVC_nested_set_model.Controllers
 {
     [Authorize]
     public class AccountController : Controller

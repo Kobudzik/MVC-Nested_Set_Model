@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(MVC_Adjacency_list_model.Startup))]
-namespace MVC_Adjacency_list_model
+[assembly: OwinStartupAttribute(typeof(MVC_nested_set_model.Startup))]
+namespace MVC_nested_set_model
 {
     public partial class Startup
     {

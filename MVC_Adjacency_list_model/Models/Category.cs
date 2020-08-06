@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MVC_Adjacency_list_model.Models
+namespace MVC_nested_set_model.Models
 {
     //this class will be used to generate Category table
     public class Category

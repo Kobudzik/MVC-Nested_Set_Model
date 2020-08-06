@@ -1,11 +1,11 @@
-﻿using MVC_Adjacency_list_model.ViewModels;
+﻿using MVC_nested_set_model.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MVC_Adjacency_list_model.Models
+namespace MVC_nested_set_model.Models
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class MovingCategoryCheck : ValidationAttribute

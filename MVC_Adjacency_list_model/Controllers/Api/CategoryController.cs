@@ -1,8 +1,8 @@
-﻿using MVC_Adjacency_list_model.Models;
+﻿using MVC_nested_set_model.Models;
 using System.Net;
 using System.Web.Http;
 
-namespace MVC_Adjacency_list_model.Controllers.Api
+namespace MVC_nested_set_model.Controllers.Api
 {
     public class CategoryController : System.Web.Http.ApiController
     {

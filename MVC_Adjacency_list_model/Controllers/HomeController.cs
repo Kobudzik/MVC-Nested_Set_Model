@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MVC_Adjacency_list_model.Controllers
+namespace MVC_nested_set_model.Controllers
 {
     public class HomeController : Controller
     {

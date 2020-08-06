@@ -1,15 +1,15 @@
-﻿using MVC_Adjacency_list_model.ViewModels;
+﻿using MVC_nested_set_model.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-namespace MVC_Adjacency_list_model.Models
+namespace MVC_nested_set_model.Models
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly string connectionString = @"Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-MVC_Adjacency_list_model-20200731104721.mdf;Initial Catalog=aspnet-MVC_Adjacency_list_model-20200731104721;Integrated Security=True";
+        private readonly string connectionString = @"Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-MVC_nested_set_model-20200731104721.mdf;Initial Catalog=aspnet-MVC_nested_set_model-20200731104721;Integrated Security=True";
 
         /// <summary>
         /// To View all Categories details

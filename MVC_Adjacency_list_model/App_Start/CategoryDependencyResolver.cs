@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Services.Description;
 using Unity;
 
-namespace MVC_Adjacency_list_model.App_Start
+namespace MVC_nested_set_model.App_Start
 {
     public class CategoryDependencyResolver : IDependencyResolver
     {

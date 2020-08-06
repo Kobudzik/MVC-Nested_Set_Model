@@ -1,19 +1,19 @@
-namespace MVC_Adjacency_list_model.Migrations
+namespace MVC_nested_set_model.Migrations
 {
-    using MVC_Adjacency_list_model.Models;
+    using MVC_nested_set_model.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MVC_Adjacency_list_model.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<MVC_nested_set_model.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(MVC_Adjacency_list_model.Models.ApplicationDbContext context)
+        protected override void Seed(MVC_nested_set_model.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

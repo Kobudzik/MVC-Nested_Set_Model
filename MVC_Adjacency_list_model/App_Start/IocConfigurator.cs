@@ -1,4 +1,4 @@
-﻿using MVC_Adjacency_list_model.Models;
+﻿using MVC_nested_set_model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Unity;
 
-namespace MVC_Adjacency_list_model.App_Start
+namespace MVC_nested_set_model.App_Start
 {
     public static class IocConfigurator
     {

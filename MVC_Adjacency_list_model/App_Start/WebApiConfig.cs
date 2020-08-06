@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace MVC_Adjacency_list_model
+namespace MVC_nested_set_model
 {
     public static class WebApiConfig
     {

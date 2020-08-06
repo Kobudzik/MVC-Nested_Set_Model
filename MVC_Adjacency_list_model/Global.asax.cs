@@ -1,4 +1,4 @@
-using MVC_Adjacency_list_model.App_Start;
+using MVC_nested_set_model.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace MVC_Adjacency_list_model
+namespace MVC_nested_set_model
 {
     public class MvcApplication : System.Web.HttpApplication
     {

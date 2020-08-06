@@ -1,10 +1,10 @@
-﻿using MVC_Adjacency_list_model.ViewModels;
-using MVC_Adjacency_list_model.Models;
+﻿using MVC_nested_set_model.ViewModels;
+using MVC_nested_set_model.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web.Mvc;
 
-namespace MVC_Adjacency_list_model.Controllers
+namespace MVC_nested_set_model.Controllers
 {
     public class CategoryController : Controller
     {

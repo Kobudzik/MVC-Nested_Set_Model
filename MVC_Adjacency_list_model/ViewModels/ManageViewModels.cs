@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace MVC_Adjacency_list_model.Models
+namespace MVC_nested_set_model.Models
 {
     public class IndexViewModel
     {

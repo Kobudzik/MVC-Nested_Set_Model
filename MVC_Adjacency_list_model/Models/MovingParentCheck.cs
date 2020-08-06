@@ -1,8 +1,8 @@
-﻿using MVC_Adjacency_list_model.ViewModels;
+﻿using MVC_nested_set_model.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MVC_Adjacency_list_model.Models
+namespace MVC_nested_set_model.Models
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class MovingParentCheck : ValidationAttribute

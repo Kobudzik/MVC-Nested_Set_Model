@@ -1,4 +1,4 @@
-namespace MVC_Adjacency_list_model.Migrations
+namespace MVC_nested_set_model.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

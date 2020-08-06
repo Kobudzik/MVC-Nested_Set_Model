@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using MVC_Adjacency_list_model.Models;
+using MVC_nested_set_model.Models;
 
-namespace MVC_Adjacency_list_model
+namespace MVC_nested_set_model
 {
     public partial class Startup
     {

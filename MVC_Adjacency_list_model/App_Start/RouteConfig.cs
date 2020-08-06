@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MVC_Adjacency_list_model
+namespace MVC_nested_set_model
 {
     public class RouteConfig
     {
