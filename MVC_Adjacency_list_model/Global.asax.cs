@@ -1,3 +1,4 @@
+using MVC_Adjacency_list_model.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace MVC_Adjacency_list_model
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            IocConfigurator.ConfigureIocCategoryContainer();
         }
     }
 }

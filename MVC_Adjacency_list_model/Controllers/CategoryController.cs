@@ -8,16 +8,21 @@ namespace MVC_Adjacency_list_model.Controllers
 {
     public class CategoryController : Controller
     {
+        private readonly ICategoryRepository _categoryRepository;
 
-        private CategoryRepository myRepo = new CategoryRepository();
-        
+        public CategoryController(ICategoryRepository myRepo)
+        {
+            _categoryRepository = myRepo;
+        }
+
+
         //GET  /category
         //GET  /category/index
         public ActionResult Index()
         {            
             List<Category> nestedList = new List<Category>();
-            myRepo.GetRootCords(out int lft, out int rgt);
-            myRepo.GetChildren(lft, rgt, nestedList);
+            _categoryRepository.GetRootCords(out int lft, out int rgt);
+            _categoryRepository.GetChildren(lft, rgt, nestedList);
 
             if (User.IsInRole("Administrator"))
             {
@@ -25,8 +30,7 @@ namespace MVC_Adjacency_list_model.Controllers
             }
 
             return View("ReadOnlyTree", nestedList);
-        }
-        
+        }        
 
         //GET   /category/Edit/ID
         [HttpGet]
@@ -39,7 +43,7 @@ namespace MVC_Adjacency_list_model.Controllers
             }
 
             //gets data of one category to display it to user
-            Category category = myRepo.GetSingle(id);
+            Category category = _categoryRepository.GetSingle(id);
 
             if (category.ID==0 || category.Name=="ROOT")
             {
@@ -47,8 +51,6 @@ namespace MVC_Adjacency_list_model.Controllers
             }
             return View(category);
         }
-
-
 
         //POST   /category/edit
         [HttpPost]
@@ -61,10 +63,9 @@ namespace MVC_Adjacency_list_model.Controllers
             {
                 return View(category);
             }
-            myRepo.Rename(category);
+            _categoryRepository.Rename(category);
             return RedirectToAction("Index");
         }
-
 
         //GET   /category/NewNode/ID
         [HttpGet]
@@ -76,7 +77,7 @@ namespace MVC_Adjacency_list_model.Controllers
                 return HttpNotFound();
             }
             //gets data of one category to display it to user
-            Category categoryInDB = myRepo.GetSingle(id);
+            Category categoryInDB = _categoryRepository.GetSingle(id);
 
             //if object doesn't exist
             if (categoryInDB.ID != id)
@@ -86,7 +87,6 @@ namespace MVC_Adjacency_list_model.Controllers
             }
             return View(categoryInDB);
         }
-
 
         //POST   /category/NewCategory
         [HttpPost]
@@ -99,11 +99,9 @@ namespace MVC_Adjacency_list_model.Controllers
             {
                 return View(category);
             }
-            myRepo.InsertInside(category.ID, category.Name);
+            _categoryRepository.InsertInside(category.ID, category.Name);
             return RedirectToAction("Index");
         }
-
-
 
         //GET /category/Move
         [HttpGet]
@@ -113,12 +111,11 @@ namespace MVC_Adjacency_list_model.Controllers
             //gets data of one category to display it to user
             MoveCategoryViewModel viewModel = new MoveCategoryViewModel
             {
-                allCategoriesList = myRepo.GetAll()
+                allCategoriesList = _categoryRepository.GetAll()
             };
 
             return View(viewModel);
         }
-
 
         //POST   /category/move
         [HttpPost]
@@ -129,11 +126,11 @@ namespace MVC_Adjacency_list_model.Controllers
             //if parameter object is not valid
             if (!ModelState.IsValid)
             {
-                viewModel.allCategoriesList = myRepo.GetAll();
+                viewModel.allCategoriesList = _categoryRepository.GetAll();
                 return View("MoveCategory", viewModel);
             }
 
-            myRepo.Move(viewModel.MovingNodeID, viewModel.NewParentID);
+            _categoryRepository.Move(viewModel.MovingNodeID, viewModel.NewParentID);
             return RedirectToAction("Index", viewModel);
         }
     }

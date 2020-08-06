@@ -1,4 +1,5 @@
-﻿using MVC_Adjacency_list_model.Models;
+﻿using MVC_Adjacency_list_model.App_Start;
+using MVC_Adjacency_list_model.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ namespace MVC_Adjacency_list_model.ViewModels
     {
         [Required]
         [MovingParentCheck]
-        [NewCheck]
+        [MoveInsideCheck]
         public int? MovingNodeID { get; set; }
 
         [Required]
