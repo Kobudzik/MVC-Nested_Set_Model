@@ -15,11 +15,10 @@ namespace MVC_Adjacency_list_model.Controllers
             _categoryRepository = myRepo;
         }
 
-
         //GET  /category
         //GET  /category/index
         public ActionResult Index()
-        {            
+        {
             List<Category> nestedList = new List<Category>();
             _categoryRepository.GetRootCords(out int lft, out int rgt);
             _categoryRepository.GetChildren(lft, rgt, nestedList);
@@ -30,7 +29,7 @@ namespace MVC_Adjacency_list_model.Controllers
             }
 
             return View("ReadOnlyTree", nestedList);
-        }        
+        }
 
         //GET   /category/Edit/ID
         [HttpGet]

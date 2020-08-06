@@ -10,41 +10,23 @@ namespace MVC_Adjacency_list_model.Models
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class MoveInsideCheck : ValidationAttribute
     {
-        //private readonly ICategoryRepository _categoryRepository;
-
-        //public NewCheck(ICategoryRepository myRepo)
-        //{
-        //    _categoryRepository = myRepo;
-        //}
-
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var myModel = (MoveCategoryViewModel)validationContext.ObjectInstance;
 
-            CategoryRepository myRepo = new CategoryRepository();
-            List<Category> everyChildrenList = myRepo.GetAll();
+            CategoryRepository myRepository = new CategoryRepository();
+            List<Category> everyChildrenList = myRepository.GetAll();
 
             Category movingNode = everyChildrenList.First(m => m.ID == myModel.MovingNodeID);
-            Category newParent = everyChildrenList.First(m => m.ID == myModel.NewParentID);
-
-            Debug.WriteLine("MOOVING: " + movingNode.ToString());
-            Debug.WriteLine("new PARENT: " + newParent.ToString());
-
-            int newParentLft = newParent.Lft;
-            int newParentRgt = newParent.Rgt;
-
             int movingNodeLft = movingNode.Lft;
             int movingNodeRgt = movingNode.Rgt;
 
-            Debug.WriteLine("moving: LFT " + movingNodeLft + "RGT: " + movingNodeRgt);
-
-            Debug.WriteLine("new PARENT: LFT " + newParentLft + " RGT: " + newParentRgt);
-
-
+            Category newParent = everyChildrenList.First(m => m.ID == myModel.NewParentID);
+            int newParentLft = newParent.Lft;
+            int newParentRgt = newParent.Rgt;
 
             if (newParentLft > movingNodeLft && newParentRgt < movingNodeRgt)
             {
-                Debug.WriteLine(newParentLft + ">" + movingNodeLft + "  AND   "+ newParentRgt + " <" + movingNodeRgt);
                 return new ValidationResult("You can't move category inside itself!");
             }
             return ValidationResult.Success;

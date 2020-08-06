@@ -20,7 +20,6 @@ namespace MVC_Adjacency_list_model.Models
             {
                 return new ValidationResult("You can't move root!");
             }
-
             return ValidationResult.Success;
         }
     }

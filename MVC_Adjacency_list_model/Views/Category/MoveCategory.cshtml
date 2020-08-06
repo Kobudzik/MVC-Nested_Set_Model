@@ -4,13 +4,11 @@
     ViewBag.Title = "Move Category";
 }
 
-
 <h2>Move category.</h2>
 <hr />
 
 @using (Html.BeginForm("MoveCategory", "Category"))
 {
-
     <div class="form-group">
         <label>Category to move:</label>
         <p>
@@ -31,9 +29,6 @@
     <button type="submit" class="btn btn-primary">Move</button>
     <a href="/Category" class="btn btn-primary">Cancel</a>
 }
-
-
-
 
 @section scripts
 {

@@ -21,6 +21,5 @@ namespace MVC_Adjacency_list_model.App_Start
         {
             container.RegisterType<ICategoryRepository, CategoryRepository>();
         }
-
     }
 }

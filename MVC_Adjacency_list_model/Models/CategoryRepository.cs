@@ -11,9 +11,8 @@ namespace MVC_Adjacency_list_model.Models
     {
         private readonly string connectionString = @"Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-MVC_Adjacency_list_model-20200731104721.mdf;Initial Catalog=aspnet-MVC_Adjacency_list_model-20200731104721;Integrated Security=True";
 
-
         /// <summary>
-        /// To View all Categories details    NOT USED
+        /// To View all Categories details
         /// </summary>
         /// <returns>List of Category objects</returns>
         public List<Category> GetAll()

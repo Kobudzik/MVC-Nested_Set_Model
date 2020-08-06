@@ -6,28 +6,33 @@ namespace MVC_Adjacency_list_model.Controllers.Api
 {
     public class CategoryController : System.Web.Http.ApiController
     {
-        CategoryRepository objRepository = new CategoryRepository();
+        private readonly ICategoryRepository _categoryRepository;
+
+        public CategoryController(ICategoryRepository myRepo)
+        {
+            _categoryRepository = myRepo;
+        }
 
         [HttpDelete]
         [System.Web.Mvc.ValidateAntiForgeryToken]
         [Authorize(Roles = RoleName.Administrator)]
         public void DeleteCategory(int id)
         {
-            Category categoryInDb = objRepository.GetSingle(id);
+            Category categoryInDb = _categoryRepository.GetSingle(id);
 
             if (categoryInDb == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            objRepository.Delete(id);
+            _categoryRepository.Delete(id);
         }
 
         [HttpPost]
         [System.Web.Mvc.ValidateAntiForgeryToken]
         [Authorize(Roles = RoleName.Administrator)]
         public void DeleteAllCategries()
-        {            
-            objRepository.DeleteAllCategories();
+        {
+            _categoryRepository.DeleteAllCategories();
         }
     }
 }

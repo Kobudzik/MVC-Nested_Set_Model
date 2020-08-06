@@ -197,9 +197,9 @@
     <Compile Include="Migrations\202008050655152_SeedUsers.Designer.cs">
       <DependentUpon>202008050655152_SeedUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202008051657094_SeedRootCategory.cs" />
-    <Compile Include="Migrations\202008051657094_SeedRootCategory.Designer.cs">
-      <DependentUpon>202008051657094_SeedRootCategory.cs</DependentUpon>
+    <Compile Include="Migrations\.cs" />
+    <Compile Include="Migrations\.Designer.cs">
+      <DependentUpon>.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ICategoryRepository.cs" />
     <Compile Include="Models\MovingParentCheck.cs" />
@@ -256,7 +256,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\TreeMainPage.js" />
+    <Content Include="Scripts\TreeAdmin.js" />
+    <Content Include="Scripts\TreeShared.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -325,8 +326,8 @@
     <EmbeddedResource Include="Migrations\202008050655152_SeedUsers.resx">
       <DependentUpon>202008050655152_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008051657094_SeedRootCategory.resx">
-      <DependentUpon>202008051657094_SeedRootCategory.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\.resx">
+      <DependentUpon>.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

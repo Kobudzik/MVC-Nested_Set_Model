@@ -27,8 +27,12 @@ namespace MVC_Adjacency_list_model
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/TreeScripts").Include(
-            "~/Scripts/TreeMainPage.js"));
+            bundles.Add(new ScriptBundle("~/bundles/TreeAdminPage").Include(
+            "~/Scripts/TreeShared.js",
+            "~/Scripts/TreeAdmin.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/TreeViewOnly").Include(
+            "~/Scripts/TreeShared.js"));
         }
     }
 }

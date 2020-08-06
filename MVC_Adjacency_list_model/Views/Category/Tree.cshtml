@@ -29,7 +29,6 @@
             }
         @:</ul>
     }
-
 }
 
 @helper DetailedMenu(MVC_Adjacency_list_model.Models.Category item)
@@ -73,6 +72,13 @@ else
         <span title="New Root Category" class="glyphicon glyphicon-plus-sign"></span>
     </a>
 
+    @if (Model.Count() > 1)
+    {
+        <a id="sortAllButton">
+            <span title="sort" class="glyphicon glyphicon-sort"></span>
+        </a>
+    }
+
     @if (Model.Count() > 0)
     {
         <a id="toggleAllButton">
@@ -82,10 +88,6 @@ else
         <a href=@Url.Action("MoveCategory", "Category")>
             <span title="Move Category" class="glyphicon glyphicon-pushpin"></span>
         </a>
-
-        <a id="sortAllButton">
-            <span title="sort" class="glyphicon glyphicon-sort"></span>
-        </a>
     }
 
     @if (Model.Count() > 0)
@@ -94,19 +96,13 @@ else
             <span title="Delete all" class="glyphicon glyphicon-trash"></span>
         </a>
     }
-
-
-
 </div>
 
 <div id="listDiv">
     @TreeView(Model, 0)
 </div>
 
-
-
-
 @section scripts
 {
-    @Scripts.Render("~/bundles/TreeScripts")
+    @Scripts.Render("~/bundles/TreeAdminPage")
 }

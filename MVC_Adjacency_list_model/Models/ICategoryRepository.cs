@@ -17,6 +17,6 @@ namespace MVC_Adjacency_list_model.Models
         void InsertInside(int IDWhere, string NameWhat);
         void Delete(int id);
         void Move(int? categoryID, int? newParentID);
-
+        void DeleteAllCategories();
     }
 }

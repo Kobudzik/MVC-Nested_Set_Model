@@ -29,11 +29,9 @@ namespace MVC_Adjacency_list_model.Models
 
         public List<Category> deeperList;
 
-
         public Category()
         {
             deeperList = new List<Category>();
         }
-
     }
 }
