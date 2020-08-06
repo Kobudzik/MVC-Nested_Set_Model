@@ -25,10 +25,10 @@ namespace MVC_nested_set_model.Controllers
 
             if (User.IsInRole("Administrator"))
             {
-                return View("Tree", nestedList);
+                return View("List", nestedList);
             }
 
-            return View("ReadOnlyTree", nestedList);
+            return View("ReadOnlyList", nestedList);
         }
 
         //GET   /category/Edit/ID

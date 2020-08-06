@@ -1,16 +1,16 @@
 ﻿@model List<MVC_nested_set_model.Models.Category>
 @{
-    ViewBag.Title = "Tree";
+    ViewBag.Title = "List";
 }
 
-@helper TreeView(List<MVC_nested_set_model.Models.Category> categoryTree, int depth)
+@helper ListView(List<MVC_nested_set_model.Models.Category> categoryList, int depth)
 {
     string typeClass = null;
-    if (categoryTree.Count() > 0)
+    if (categoryList.Count() > 0)
     {
         depth++;
         @:<ul>
-            foreach (var item in categoryTree)
+            foreach (var item in categoryList)
             {
                 //jeśli jest liściem
                 if (item.deeperList.Count() == 0)
@@ -24,7 +24,7 @@
                 <li class="@typeClass" order="database" data-my-level="@depth">
                     @item.Name
                     @DetailedMenu(item)
-                    @TreeView(item.deeperList, depth)
+                    @ListView(item.deeperList, depth)
                 </li>
             }
         @:</ul>
@@ -57,7 +57,7 @@
 
 @if (Model.Count() > 0)
 {
-    <h2>Here is your data base structure as a tree!</h2>
+    <h2>Here is your database structure as a list!</h2>
 }
 else
 {
@@ -98,10 +98,10 @@ else
 </div>
 
 <div id="listDiv">
-    @TreeView(Model, 0)
+    @ListView(Model, 0)
 </div>
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/TreeAdminPage")
+    @Scripts.Render("~/bundles/ListAdminPage")
 }

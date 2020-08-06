@@ -27,12 +27,12 @@ namespace MVC_nested_set_model
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/TreeAdminPage").Include(
-            "~/Scripts/TreeShared.js",
-            "~/Scripts/TreeAdmin.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ListAdminPage").Include(
+            "~/Scripts/ListShared.js",
+            "~/Scripts/ListAdmin.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/TreeViewOnly").Include(
-            "~/Scripts/TreeShared.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ListViewOnly").Include(
+            "~/Scripts/ListShared.js"));
         }
     }
 }
