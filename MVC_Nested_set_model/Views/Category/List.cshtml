@@ -1,0 +1,107 @@
+﻿@model List<MVC_nested_set_model.Models.Category>
+@{
+    ViewBag.Title = "List";
+}
+
+@helper ListView(List<MVC_nested_set_model.Models.Category> categoryList, int depth)
+{
+    string typeClass = null;
+    if (categoryList.Count() > 0)
+    {
+        depth++;
+        @:<ul>
+            foreach (var item in categoryList)
+            {
+                //jeśli jest liściem
+                if (item.deeperList.Count() == 0)
+                {
+                    typeClass = "leaf";
+                }
+                else
+                {
+                    typeClass = "node";
+                }
+                <li class="@typeClass" order="database" data-my-level="@depth">
+                    @item.Name
+                    @DetailedMenu(item)
+                    @ListView(item.deeperList, depth)
+                </li>
+            }
+        @:</ul>
+    }
+}
+
+@helper DetailedMenu(MVC_nested_set_model.Models.Category item)
+{
+    <div style="display: inline-block;" class="detailed-menu">
+        <a href=@Url.Action("NewCategory", "Category", new { id = item.ID })>
+            <span title="Add new category" class="glyphicon glyphicon-plus-sign"></span>
+        </a>
+
+        <a href=@Url.Action("RenameCategory", "Category", new { id = item.ID })>
+            <span title="Rename category" class="glyphicon glyphicon-tag"></span>
+        </a>
+
+        <a href="javascript:deleteCategory(@item.ID);">
+            <span title="Delete category" class="glyphicon glyphicon-trash"></span>
+        </a>
+
+        @if (item.deeperList.Count > 1)
+        {
+            <a class="small-font sortButton" title="sort">
+                <span class="glyphicon glyphicon-sort"></span>
+            </a>
+        }
+    </div>
+}
+
+@if (Model.Count() > 0)
+{
+    <h2>Here is your database structure as a list!</h2>
+}
+else
+{
+    <h2>Your database is empty!</h2>
+    <h3>Why won't you add some elements?</h3>
+}
+<hr />
+
+<div id="menu" order="random">
+    <a href="@Url.Action("NewCategory", "Category", new { id = 1 })">
+        <span title="New Root Category" class="glyphicon glyphicon-plus-sign"></span>
+    </a>
+
+    @if (Model.Count() > 1)
+    {
+        <a id="sortAllButton">
+            <span title="sort" class="glyphicon glyphicon-sort"></span>
+        </a>
+    }
+
+    @if (Model.Count() > 0)
+    {
+        <a id="toggleAllButton">
+            <span title="Toggle" class="glyphicon glyphicon-eye-open"></span>
+        </a>
+
+        <a href=@Url.Action("MoveCategory", "Category")>
+            <span title="Move Category" class="glyphicon glyphicon-pushpin"></span>
+        </a>
+    }
+
+    @if (Model.Count() > 0)
+    {
+        <a href="javascript:deleteAll();">
+            <span title="Delete all" class="glyphicon glyphicon-trash"></span>
+        </a>
+    }
+</div>
+
+<div id="listDiv">
+    @ListView(Model, 0)
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/ListAdminPage")
+}

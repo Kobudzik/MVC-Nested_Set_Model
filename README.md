@@ -20,3 +20,8 @@ Project is created with:
 * Client side validation
 * Logging in
 * Different operations available for Admin and other users
+
+
+## Screenshots
+![Index Page](https://i.ibb.co/D5P26Ys/Index-Page.png)
+![Tree Page](https://i.ibb.co/7SHzvJh/Tree-page.png)

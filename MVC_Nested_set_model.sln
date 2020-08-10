@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_nested_set_model", "MVC_Adjacency_list_model\MVC_nested_set_model.csproj", "{AF9AAD43-F782-431D-8535-ECAB1BA17610}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_nested_set_model", "MVC_Nested_set_model\MVC_nested_set_model.csproj", "{AF9AAD43-F782-431D-8535-ECAB1BA17610}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

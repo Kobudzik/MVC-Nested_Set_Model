@@ -1,0 +1,70 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.field-validation-error {
+    color: red;
+    text-decoration: underline;    
+}
+
+.small-font {
+    font-size: small;
+}
+
+.node{
+    list-style: square;
+}
+
+.leaf{
+    list-style: circle;
+}
+
+.detailed-menu{
+    font-size:small;
+    margin-left:5px;
+}
+
+#menu, #listDiv{
+    font-size:x-large;
+}
+
+span{
+    color: #B00020;
+}
+
+a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*NAVBAR*/
+/*other pages*/
+.navbar-inverse .navbar-nav > li > a{
+    color: white;
+}
+
+/*Other pages (on hover)*/
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover{
+color: black;
+}

@@ -1,0 +1,36 @@
+﻿@model MVC_nested_set_model.ViewModels.MoveCategoryViewModel
+
+@{
+    ViewBag.Title = "Move Category";
+}
+
+<h2>Move category.</h2>
+<hr />
+
+@using (Html.BeginForm("MoveCategory", "Category"))
+{
+    <div class="form-group">
+        <label>Category to move:</label>
+        <p>
+            @Html.DropDownListFor(m => m.MovingNodeID, new SelectList(Model.allCategoriesList, "ID", "Name"))
+            @Html.ValidationMessageFor(m => m.MovingNodeID)
+        </p>
+    </div>
+
+    <div class="form-group">
+        <label>New parent category:</label>
+        <p>
+            @Html.DropDownListFor(m => m.NewParentID, new SelectList(Model.allCategoriesList, "ID", "Name"))
+            @Html.ValidationMessageFor(m => m.NewParentID)
+        </p>
+    </div>
+
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Move</button>
+    <a href="/Category" class="btn btn-primary">Cancel</a>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
