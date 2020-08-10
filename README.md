@@ -1,5 +1,11 @@
 ## General info
 This project lets you create a multi-level list and store it to database using nested set model. This approach makes it easier to operate on nodes (subjectively). Please note, that only logged Administrator has privilages to edit list (add new nodes, rename existing ones, move nodes), also buttons for these operations ale only visible when certain action is possible. More detailed instructions available on INDEX page.
+
+
+
+
+
+
     
 ## Technologies
 Project is created with:
@@ -10,6 +16,9 @@ Project is created with:
 * jQuery
 * MSSQL
 * LINQ
+
+
+
 
 ## Features
 * Show/ hide every or single node and its children
@@ -22,6 +31,11 @@ Project is created with:
 * Different operations available for Admin and other users
 
 
+
+
 ## Screenshots
+Main page:
 ![Index Page](https://i.ibb.co/D5P26Ys/Index-Page.png)
+
+Structure display page:
 ![Tree Page](https://i.ibb.co/7SHzvJh/Tree-page.png)
