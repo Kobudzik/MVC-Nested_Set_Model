@@ -10,6 +10,7 @@ Project is created with:
 * Unity 5.11.7 (dependency injection)
 * jQuery
 * MSSQL
+* LINQ
 ## Features
 * Show/ hide every or single node and its children
 * Sort every or single node
