@@ -34,5 +34,8 @@ Project is created with:
 
 
 ## Screenshots
+Main page:
 ![Index Page](https://i.ibb.co/D5P26Ys/Index-Page.png)
+
+Structure display page:
 ![Tree Page](https://i.ibb.co/7SHzvJh/Tree-page.png)
